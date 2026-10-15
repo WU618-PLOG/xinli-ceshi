@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>情绪状态自查 · 焦虑+抑郁双量表</title>
+<meta name="description" content="由国际通用的 GAD-7(焦虑)与 PHQ-9(抑郁)筛查量表组成的16题情绪状态自查,3分钟出结果与建议。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%234A6D8C'/></svg>">
+<style>
+:root{
+  --ink:#26241F;--sub:#6E6A61;--faint:#9B968B;--line:#E8E3DA;--card:#FFFFFF;
+  --bg1:#F5F6F8;--bg2:#EAEEF2;--accent:#4A6D8C;--accent2:#7C99B4;
+  --weak:#E9EFF5;--radius:20px;--shadow:0 10px 30px rgba(50,60,80,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.7}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(74,109,140,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#E2E6EA;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.stem{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-bottom:16px}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:20px;font-weight:600;line-height:1.55;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15.5px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:center;gap:10px}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #CFC9BE;flex:none;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+/* result */
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:24px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.scoreline{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.scoreline .nm{font-size:16px;font-weight:700}
+.scoreline .vl{margin-left:auto;font-variant-numeric:tabular-nums;font-size:14px;color:var(--sub)}
+.sev{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:3px 11px;margin-bottom:12px}
+.track{height:12px;border-radius:999px;background:#EAEEF2;overflow:hidden;margin-bottom:14px}
+.track i{display:block;height:100%;border-radius:999px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.rtext{font-size:14.5px;color:#41403B;line-height:1.85}
+.crisis{border:1.5px solid #E3B7B7;background:#FBF3F3}
+.crisis h3{font-size:16.5px;margin-bottom:8px;color:#A34F4F}
+.crisis p{font-size:14px;color:#5C4A4A;margin-bottom:10px}
+.crisis ul{margin:0 0 10px;padding:0;list-style:none}
+.crisis li{font-size:14.5px;color:#5C4A4A;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.crisis li b{color:#8C3F3F}
+.advice{margin:0;padding:0;list-style:none}
+.advice li{position:relative;padding-left:22px;font-size:14px;color:var(--sub);margin-bottom:8px;line-height:1.8}
+.advice li::before{content:"·";position:absolute;left:6px;color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">GAD-7 + PHQ-9</div>
+      <h1>情绪状态自查</h1>
+      <p class="lead">本自查由两个国际通用的自评量表组成:前 7 题来自 GAD-7(焦虑筛查),后 9 题来自 PHQ-9(抑郁筛查)。它们被全球医疗机构广泛用于情绪状态的初步了解,题目公开发布于公有领域。</p>
+      <div class="chips">
+        <span class="chip">16 道题</span>
+        <span class="chip">约 3 分钟</span>
+        <span class="chip">焦虑 + 抑郁双维度</span>
+        <span class="chip">即时解读</span>
+      </div>
+      <ul class="list">
+        <li>请回想「最近两周」的真实情况,凭第一感觉作答</li>
+        <li>这是一个筛查工具,帮助你了解自己的状态,不是医学诊断</li>
+        <li>无论结果如何,都不代表你是怎样的人,只代表这两周的天气</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始自查</button>
+      <p class="foot">来源:GAD-7 与 PHQ-9 由 Pfizer 公开发布于公有领域,复制、翻译、展示或分发无需许可。本自查仅供自我了解参考,不能替代专业评估与诊断。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 16</div>
+    </div>
+    <div class="stem">请回想最近两周的情况,选择它困扰你的频率</div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 数据 ===== */
+var G_ITEMS=["感到紧张、焦虑或急切","无法停止或控制担忧","对各种各样的事情担忧过多","很难放松下来","由于不安而无法静坐","变得容易烦恼或急躁","感到似乎将有可怕的事情发生而害怕"];
+var P_ITEMS=["做事时提不起劲或没有兴趣","感到心情低落、沮丧或绝望","入睡困难、睡不安稳或睡得过多","感到疲倦或没有活力","食欲不振或吃太多","觉得自己很糟、很失败,或让自己或家人失望","对事情难以专注,比如看报纸或看电视时","动作或说话速度缓慢到别人已经察觉;或正好相反——烦躁不安、动来动去","有不如死掉或用某种方式伤害自己的念头"];
+var ITEMS=G_ITEMS.map(function(t){return {t:t,s:"g"}}).concat(P_ITEMS.map(function(t){return {t:t,s:"p"}}));
+var OPTIONS=["完全不会","有几天","一半以上的日子","几乎每天"];
+var GAD_BANDS=[
+ {max:4,name:"无明显焦虑",color:"#6FA287",text:"你的分数很低,最近两周整体焦虑水平比较平稳。偶尔的紧张是正常的,不需要特别处理。保持规律的作息和运动,就是最好的「情绪保养」。"},
+ {max:9,name:"轻度焦虑",color:"#D9B25F",text:"最近两周有一些紧张和担忧出现,但整体还在常见的压力反应范围内。可以试试:把担忧具体写下来(写出来往往比在脑子里转圈轻很多)、减少咖啡因、每天留 15 分钟做呼吸放松或散步。如果这些感受持续超过两周或加重,可以考虑找咨询师聊聊。"},
+ {max:14,name:"中度焦虑",color:"#D98E5F",text:"你最近两周的焦虑感比较明显,可能已经影响到睡眠、专注或社交。请认真对待这个信号——和信任的人聊聊、练习放松,并考虑预约一次专业的心理咨询或精神科评估,会让你踏实很多。"},
+ {max:21,name:"重度焦虑",color:"#C96A6A",text:"最近两周,紧张、担忧和不安的程度很高,身体也可能处在紧绷状态(心慌、坐立不安、睡不好)。这不是你「想太多」,而是情绪系统真的在超负荷。强烈建议尽快寻求专业帮助(心理咨询 / 精神科门诊),这类困扰已经有很成熟的应对方法,你不必独自扛。"}
+];
+var PHQ_BANDS=[
+ {max:4,name:"无明显抑郁",color:"#6FA287",text:"你的分数很低,最近两周的情绪状态整体平稳,兴趣和精力都还不错。继续保持规律作息、适度运动,留心自己的状态变化就好。"},
+ {max:9,name:"轻度抑郁",color:"#D9B25F",text:"最近两周,低落、疲惫或兴趣减退的迹象出现了一些,但整体程度较轻。可以试试:尽量维持日常节律(固定起床时间、出门晒太阳)、安排一点小而确定的活动、和能让你轻松的人待在一起。若持续两周以上,建议找人聊聊或寻求专业评估。"},
+ {max:14,name:"中度抑郁",color:"#D98E5F",text:"你的分数提示抑郁相关的困扰已经比较明显,10 分是国际上常用的参考线。建议主动寻求专业评估——心理咨询师或精神科都可以。这不是小题大做,而是给自己一个更轻松的出口。"},
+ {max:19,name:"中重度抑郁",color:"#C96A6A",text:"最近两周,低落、疲惫、兴趣减退等困扰的程度较高,可能需要持续的支持来应对。请尽快预约专业帮助(心理咨询 / 精神科门诊)。在此之前:保证基本的睡眠和进食,减少重大决定,把「撑住」的目标调低一点,允许自己少做一些事。"},
+ {max:27,name:"重度抑郁",color:"#B95555",text:"你的分数很高,最近两周你可能正经历相当吃力的情绪低谷。请务必尽快寻求专业帮助,最好今天就和心理援助热线或专业机构取得联系。这只是一种状态,是能够被改善的,你值得被认真对待、被好好接住。"}
+];
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var label=idx<7?"焦虑自评 "+(idx+1)+"/7":"情绪自评 "+(idx-6)+"/9";
+ var h='<div class="qnum">'+label+'</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<4;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span>'+OPTIONS[i]+'</button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var g=0,p=0;
+ for(var i=0;i<7;i++){g+=(ans[i]||0)}
+ for(var j=7;j<16;j++){p+=(ans[j]||0)}
+ var item9=ans[15]||0;
+ renderResult(g,p,item9);
+}
+function bandFor(score,bands){for(var i=0;i<bands.length;i++){if(score<=bands[i].max)return bands[i]}return bands[bands.length-1]}
+/* ===== 结果 ===== */
+function renderResult(g,p,item9){
+ var gb=bandFor(g,GAD_BANDS),pb=bandFor(p,PHQ_BANDS);
+ var h='<div class="rhead"><div class="k">情绪自查 · 结果</div><h2>你的情绪天气报告</h2><p>分数描述的是最近两周的状态,不是给你下结论</p></div>';
+ if(item9>0){
+  h+='<div class="rcard crisis"><h3>关于最后一题,想先对你说</h3>';
+  h+='<p>谢谢你如实作答。有过「不如死掉或伤害自己」的念头,意味着痛苦已经累积得很深——这不是软弱,也不代表你真的想消失,而是需要有人帮你把这份沉重分走一部分。</p>';
+  h+='<p>如果你愿意,现在就可以联系下面的专业支持,他们都是 24 小时在线的:</p>';
+  h+='<ul><li><b>全国心理援助热线:12356</b>(直接拨打)</li><li>北京心理危机研究与干预中心:<b>010-82951332</b></li><li>希望24热线:<b>400-161-9995</b></li></ul>';
+  h+='<p>如果你此刻感到难以保证自己的安全,请立刻联系身边可以信任的人,或直接拨打 120、前往最近的医院急诊。</p></div>';
+ }
+ h+='<div class="rcard"><div class="scoreline"><span class="nm">焦虑指数(GAD-7)</span><span class="vl">'+g+' / 21 分</span></div>';
+ h+='<span class="sev" style="color:'+gb.color+';background:'+gb.color+'1A">'+gb.name+'</span>';
+ h+='<div class="track"><i data-w="'+(g/21*100)+'" data-c="'+gb.color+'"></i></div>';
+ h+='<div class="rtext">'+gb.text+'</div></div>';
+ h+='<div class="rcard"><div class="scoreline"><span class="nm">抑郁指数(PHQ-9)</span><span class="vl">'+p+' / 27 分</span></div>';
+ h+='<span class="sev" style="color:'+pb.color+';background:'+pb.color+'1A">'+pb.name+'</span>';
+ h+='<div class="track"><i data-w="'+(p/27*100)+'" data-c="'+pb.color+'"></i></div>';
+ h+='<div class="rtext">'+pb.text+'</div></div>';
+ if(g>=10||p>=10){
+  h+='<div class="rcard"><div class="scoreline"><span class="nm">一个重要的提醒</span></div><div class="rtext">你的某一项分数达到了国际上常用的参考线(10 分)。请把它当作一次认真的提醒:预约一次专业的心理咨询或精神科评估。早一点获得支持,恢复往往越快。</div></div>';
+ }
+ h+='<div class="rcard"><div class="scoreline"><span class="nm">给最近两周的你</span></div><ul class="advice">';
+ h+='<li>情绪像天气,一次自查只是「天气预报」,它描述状态,不定义你</li>';
+ h+='<li>如果困扰持续两周以上、明显影响工作生活,专业帮助是性价比最高的选择</li>';
+ h+='<li>睡眠、运动、晒太阳、和人说话,是最基础的四样「情绪营养」</li>';
+ h+='<li>求助是一种能力,不是软弱;你不需要一个人扛</li>';
+ h+='</ul></div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新自查</button></div>';
+ h+='<p class="foot" style="text-align:center">GAD-7 与 PHQ-9 为公开发布的筛查量表(公有领域)。本自查仅为自我了解参考,不能替代专业诊断与治疗建议。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i").forEach(function(el){el.style.width=el.dataset.w+"%";el.style.background=el.dataset.c})},60);
+}
+</script>
+</body>
+</html>

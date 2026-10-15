@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>大五人格测试 · 50题</title>
+<meta name="description" content="基于国际人格项目库(IPIP)公开题目的50题大五人格测试,测量外向性、宜人性、尽责性、情绪稳定性与开放性五大维度。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2337655E'/></svg>">
+<style>
+:root{
+  --ink:#26241F;--sub:#6E6A61;--faint:#9B968B;--line:#E8E3DA;--card:#FFFFFF;
+  --bg1:#F7F4EF;--bg2:#EDEBE4;--accent:#37655E;--accent2:#5B8A81;
+  --weak:#E9F0EE;--radius:20px;--shadow:0 10px 30px rgba(60,55,40,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;letter-spacing:.01em;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.7}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(55,101,94,.28);transition:transform .15s ease,box-shadow .15s ease}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:none;color:var(--accent);box-shadow:none;border:1.5px solid var(--accent);margin-top:12px}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+/* quiz */
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#E4E0D7;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:52px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox{animation:none}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:20px;font-weight:600;line-height:1.55;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15.5px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:center;gap:10px}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #CFC9BE;flex:none;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+/* result */
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:24px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.radar{display:block;margin:0 auto}
+.row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.row:last-child{margin-bottom:0}
+.row .name{width:74px;flex:none;font-size:14px;font-weight:600}
+.row .track{flex:1;height:10px;border-radius:999px;background:#EFEBE3;overflow:hidden}
+.row .track i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.row .val{width:64px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.dim{margin-bottom:14px}
+.dim h3{font-size:17px;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.tag{font-size:11.5px;font-weight:600;color:var(--accent);background:var(--weak);padding:3px 10px;border-radius:999px}
+.dim p{font-size:14.5px;color:#4C483F;line-height:1.85}
+.sec-t{font-size:17px;font-weight:700;margin:22px 0 10px}
+.gentle{font-size:14px;color:var(--sub);line-height:1.85}
+.advice{margin:0;padding:0;list-style:none}
+.advice li{position:relative;padding-left:22px;font-size:14px;color:var(--sub);margin-bottom:8px;line-height:1.8}
+.advice li::before{content:"·";position:absolute;left:6px;color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">BIG FIVE · IPIP-50</div>
+      <h1>大五人格测试</h1>
+      <p class="lead">大五人格(Big Five)是当代心理学公认的人格"通用坐标系"。本测试基于国际人格项目库(IPIP)的公开题目编制,用 50 道题描绘你身上五个最核心的人格维度。</p>
+      <div class="chips">
+        <span class="chip">50 道题</span>
+        <span class="chip">约 6-8 分钟</span>
+        <span class="chip">五大维度</span>
+        <span class="chip">自动出报告</span>
+      </div>
+      <ul class="list">
+        <li>请根据日常真实的你作答,凭第一直觉,不要过度思考</li>
+        <li>题目没有对错,分数也没有好坏,它描述的是倾向而非能力</li>
+        <li>尽量选择第一反应,而不是"我应该是什么样"</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">题目来源:国际人格项目库(IPIP, Public Domain),可自由使用。本测试仅供自我了解与参考,不构成医学、心理或职业诊断依据。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 50</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 数据 ===== */
+var ITEMS=[
+ {t:"在聚会中,我往往是带动气氛的人",d:"E",k:1},
+ {t:"我对别人的处境不太关心",d:"A",k:-1},
+ {t:"我凡事习惯提前准备",d:"C",k:1},
+ {t:"我容易感到紧张、有压力",d:"S",k:-1},
+ {t:"我的词汇量比较丰富",d:"O",k:1},
+ {t:"我不太爱说话",d:"E",k:-1},
+ {t:"我发自内心地关心他人",d:"A",k:1},
+ {t:"我常把东西随手乱放",d:"C",k:-1},
+ {t:"大多数时候,我都很放松",d:"S",k:1},
+ {t:"抽象的概念对我来说不太好理解",d:"O",k:-1},
+ {t:"和别人在一起时,我感到自在放松",d:"E",k:1},
+ {t:"我说话有时会冒犯到别人",d:"A",k:-1},
+ {t:"我注重细节",d:"C",k:1},
+ {t:"我会为各种事情担心",d:"S",k:-1},
+ {t:"我的想象力很丰富、很生动",d:"O",k:1},
+ {t:"在人群中,我更愿意待在不显眼的位置",d:"E",k:-1},
+ {t:"我能体会到他人的感受与情绪",d:"A",k:1},
+ {t:"我常把事情搞得一团糟",d:"C",k:-1},
+ {t:"我很少感到情绪低落",d:"S",k:1},
+ {t:"我对抽象的话题不感兴趣",d:"O",k:-1},
+ {t:"我常常主动发起交谈",d:"E",k:1},
+ {t:"我对别人的问题不感兴趣",d:"A",k:-1},
+ {t:"该做的杂事,我会立刻去做",d:"C",k:1},
+ {t:"我容易被一点小事影响,心绪被搅动",d:"S",k:-1},
+ {t:"我常冒出很棒的创意和点子",d:"O",k:1},
+ {t:"我常常没什么话想说",d:"E",k:-1},
+ {t:"我心肠比较软",d:"A",k:1},
+ {t:"我常常忘记把东西放回原位",d:"C",k:-1},
+ {t:"我容易被惹得心烦",d:"S",k:-1},
+ {t:"我的想象力不算丰富",d:"O",k:-1},
+ {t:"在聚会上,我会和很多不同的人聊天",d:"E",k:1},
+ {t:"我对他人其实没有太多兴趣",d:"A",k:-1},
+ {t:"我喜欢秩序井然的感觉",d:"C",k:1},
+ {t:"我的情绪起伏比较大",d:"S",k:-1},
+ {t:"我理解新事物很快",d:"O",k:1},
+ {t:"我不喜欢把注意力引到自己身上",d:"E",k:-1},
+ {t:"我愿意为别人专门抽出时间",d:"A",k:1},
+ {t:"我有时会推脱自己该做的事",d:"C",k:-1},
+ {t:"我的心情常常忽好忽坏",d:"S",k:-1},
+ {t:"我说话时会用一些不常见的词",d:"O",k:1},
+ {t:"我不介意成为大家关注的焦点",d:"E",k:1},
+ {t:"我能感受到他人细微的情绪",d:"A",k:1},
+ {t:"我会按自己安排的日程行事",d:"C",k:1},
+ {t:"我容易被激怒或变得烦躁",d:"S",k:-1},
+ {t:"我常花时间沉思、复盘一些事情",d:"O",k:1},
+ {t:"在陌生人面前,我比较安静",d:"E",k:-1},
+ {t:"我善于让别人感到轻松自在",d:"A",k:1},
+ {t:"我做事要求严格、一丝不苟",d:"C",k:1},
+ {t:"我常常感到闷闷不乐",d:"S",k:-1},
+ {t:"我的脑子里总是充满各种想法",d:"O",k:1}
+];
+var OPTIONS=["非常不符合","不太符合","不确定","比较符合","非常符合"];
+var DIMS={
+ E:{name:"外向性",alias:"社交活力"},
+ A:{name:"宜人性",alias:"亲和温暖"},
+ C:{name:"尽责性",alias:"自律条理"},
+ S:{name:"情绪稳定性",alias:"情绪底盘"},
+ O:{name:"开放性",alias:"开放想象"}
+};
+var DIM_ORDER=["E","A","C","S","O"];
+var BAND={
+ E:[
+  "你更偏爱安静、深入、有质量的交流,独处对你来说不是孤单,而是充电。你不是「不合群」,只是更挑对象、更慎开口——小范围的深度对话,常常比热闹的聚会更让你满足。你的能量不需要向外证明,守住自己的节奏就好。",
+  "你在社交上收放自如:该热闹时能热闹,该安静时也能享受独处,会随场合和心情灵活切换。这种「可进可退」的社交弹性,让你既能融入群体,又不被社交绑架,是一种很稳的状态。",
+  "你在人群里自带能量:和他人互动会给你充电,主动开口、活跃气氛是你的本能反应。你往往朋友多、机会也多,团队里常是那个把气氛带热的人。这是很宝贵的社会能量。只是记得:给别人留一点节奏,再热闹的人,也需要独处来回血。"
+ ],
+ A:[
+  "你更习惯直来直去、就事论事,不太被别人的情绪左右,敢于表达立场、争取利益。这在谈判、竞争和需要果断的场景里是优势。唯一要注意的是:同样的意思,换个更柔和的表达,往往能少一半阻力。",
+  "你既能体谅他人,也不会轻易委屈自己,在「照顾别人」和「照顾自己」之间保持着不错的平衡。这样的你在关系里是稳健的:不讨好,也不冷漠。",
+  "你对他人的情绪几乎是本能地敏感:会心软、会替人着想、愿意腾出时间帮助别人。你身上有一种让人放松、愿意信任的气质,这是很好的人缘资本。只是要留意:善良也要有边界,学会温和而坚定地拒绝,别把付出透支到委屈自己。"
+ ],
+ C:[
+  "你天生不喜欢被计划和条条框框束缚,随性、灵活、临场应变强,创意和即兴发挥是你的舒适区。要留意的是:在需要长期坚持的事情上,可以用外部工具来补足条理——清单、提醒、截止日期,把「靠自觉」换成「靠系统」。",
+  "你该靠谱的时候靠谱,也不会苛求事事完美,属于「有弹性」的责任感。计划被打乱时你会调整,而不是崩溃;这让你在变化的环境里更从容。",
+  "你属于「说到做到」的那类人:提前准备、注重细节、有计划、有交代,交给别人的事从不让人操心。高尽责性是预测长期成就最稳定的人格特质之一。请小心完美主义:给自己留一些「完成比完美重要」的时刻,偶尔的松弛不会毁掉你的可靠。"
+ ],
+ S:[
+  "你的感受器很灵敏:情绪来得快、来得真,也更容易被小事牵动。这不全是坏事——敏感的人往往共情力强、洞察细腻,能捕捉到别人忽略的信号。照顾好自己会明显改善体验:保证睡眠、规律运动、把情绪写下来,必要时和朋友或专业人士聊聊。",
+  "大多数时候你能稳住自己,压力大时也会有明显的起伏——这就是大多数人的真实状态。你的功课是提高「恢复速度」:情绪来了能察觉,也能比较快地回到自己的基线。",
+  "你的情绪底盘很稳:风浪来了,你大多能保持镇定,不太容易陷入内耗和反复。恢复力好、抗压强,身边人常觉得你「稳」。一个小提醒:稳不等于没有感受,别习惯性忽略自己的情绪,也体谅一下更敏感的人。"
+ ],
+ O:[
+  "你更信任经验、事实和已知的路径:务实、专注、不折腾,把事情做扎实是你的强项,世界同样需要这样的人。偶尔给自己一点「小剂量的新鲜感」——一条新路线、一本新领域的书,不必多,尝个鲜就好。",
+  "你对新事物有兴趣,也看重务实和稳定,好奇心与谨慎并存。需要创新时你能跟上,需要守成时你也站得住,是团队里比较均衡的一员。",
+  "你是天生的探索者:好奇心重、想象力丰富,喜欢新观点、新体验,理解抽象概念毫不费力。你在需要创意、学习与跨界的事情上优势明显。记得给奇思妙想配一条「行动路线」,它们会更有价值。"
+ ]
+};
+var BAND_NAME=["偏低","中等","偏高"];
+var TOPIC={
+ E:["你更享受安静与深度交流","你在社交中灵活自如","你自带社交能量场"],
+ A:["你注重立场与边界","你懂得平衡他人与自己","你温暖而富有同理心"],
+ C:["你灵活随性、不爱束缚","你有弹性地负责","你自律可靠、说到做到"],
+ S:["你感受细腻、共情力强","你情绪总体稳得住","你情绪稳、抗压力强"],
+ O:["你务实、专注、重经验","你好奇且务实","你好奇开放、想象力强"]
+};
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<5;i++){h+='<button class="opt'+(ans[idx]===i+1?" on":"")+'" data-v="'+(i+1)+'"><span class="dot"></span>'+OPTIONS[i]+'</button>'}
+ h+='</div>';box.innerHTML=h;
+ var btns=box.querySelectorAll(".opt");
+ btns.forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var raw={E:0,A:0,C:0,S:0,O:0};
+ ITEMS.forEach(function(it,i){var v=ans[i]||3;raw[it.d]+=(it.k>0?v:6-v)});
+ renderResult(raw);
+}
+function bandOf(s){return s<=29?0:(s<=40?1:2)}
+/* ===== 雷达图 ===== */
+function radarSVG(raw){
+ var cx=170,cy=146,R=100;
+ function pt(p,i){var a=(-90+i*72)*Math.PI/180;return [cx+Math.cos(a)*R*p,cy+Math.sin(a)*R*p]}
+ var s="";
+ [0.25,0.5,0.75,1].forEach(function(p){
+  var d="M";DIM_ORDER.forEach(function(_,i){var q=pt(p,i);d+=(i?"L":"")+q[0].toFixed(1)+" "+q[1].toFixed(1)});
+  s+='<path d="'+d+'Z" fill="none" stroke="#E4E0D7" stroke-width="1"/>';
+ });
+ DIM_ORDER.forEach(function(_,i){var q=pt(1,i);s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" stroke="#E4E0D7" stroke-width="1"/>'});
+ var d="M";DIM_ORDER.forEach(function(k,i){var p=(raw[k]-10)/40,q=pt(p,i);d+=(i?"L":"")+q[0].toFixed(1)+" "+q[1].toFixed(1)});
+ s+='<path d="'+d+'Z" fill="rgba(55,101,94,.16)" stroke="#37655E" stroke-width="2" stroke-linejoin="round"/>';
+ DIM_ORDER.forEach(function(k,i){var p=(raw[k]-10)/40,q=pt(p,i);s+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="3.5" fill="#37655E"/>'});
+ DIM_ORDER.forEach(function(k,i){
+  var a=(-90+i*72)*Math.PI/180,lx=cx+Math.cos(a)*123,ly=cy+Math.sin(a)*123+4;
+  var anch=Math.abs(Math.cos(a))<0.1?"middle":(Math.cos(a)>0?"start":"end");
+  s+='<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" text-anchor="'+anch+'" font-size="12" fill="#6E6A61" font-weight="600">'+DIMS[k].name+'</text>';
+ });
+ return '<svg class="radar" width="340" height="292" viewBox="0 0 340 292">'+s+'</svg>';
+}
+/* ===== 结果 ===== */
+function renderResult(raw){
+ var top=DIM_ORDER.slice().sort(function(a,b){return raw[b]-raw[a]});
+ var hi=top[0],lo=top[4];
+ var h='<div class="rhead"><div class="k">BIG FIVE · 你的画像</div><h2>你的人格五维图</h2><p>分数描述的是倾向而不是能力,没有好坏之分</p></div>';
+ h+='<div class="rcard">'+radarSVG(raw);
+ h+='<div style="margin-top:8px">';
+ DIM_ORDER.forEach(function(k){var p=(raw[k]-10)/40*100;
+  h+='<div class="row"><span class="name">'+DIMS[k].name+'</span><span class="track"><i data-w="'+p+'"></i></span><span class="val">'+raw[k]+' / 50</span></div>';
+ });
+ h+='</div></div>';
+ DIM_ORDER.forEach(function(k){var b=bandOf(raw[k]);
+  h+='<div class="rcard dim"><h3>'+DIMS[k].name+' <span class="tag">'+BAND_NAME[b]+' · '+raw[k]+'分</span></h3><p>'+BAND[k][b]+'</p></div>';
+ });
+ h+='<div class="rcard"><div class="sec-t">合起来看</div>';
+ h+='<p class="gentle">在这五个维度里,你的相对高分在【'+DIMS[hi].name+'】——' + TOPIC[hi][bandOf(raw[hi])] + ';相对低分在【'+DIMS[lo].name+'】——' + TOPIC[lo][bandOf(raw[lo])] + '。这只是一幅快照,不是你的全部。</p>';
+ h+='<ul class="advice" style="margin-top:12px">';
+ h+='<li>高分维度是你的优势区,多把自己放到用得上它们的场景里</li>';
+ h+='<li>低分维度不必硬补,把期待调整成「够用就好」,人会松很多</li>';
+ h+='<li>人格会随经历缓慢变化,隔半年再测一次对比,会很有意思</li>';
+ h+='<li>把这份画像当作了解自己的起点,而不是终点</li>';
+ h+='</ul></div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">题目来自国际人格项目库(IPIP, Public Domain)。本测试仅供自我了解与参考,不构成医学、心理或职业诊断依据。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>亲密关系依恋类型测试 · 24题</title>
+<meta name="description" content="基于依恋理论(Attachment Theory)的原创24题测试,测量依恋焦虑与依恋回避两个维度,给出安全型/焦虑型/回避型/紊乱型四种类型报告。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23A2695C'/></svg>">
+<style>
+:root{
+  --ink:#26241F;--sub:#6E6A61;--faint:#9B968B;--line:#EAE2DA;--card:#FFFFFF;
+  --bg1:#F8F4F0;--bg2:#F0E8E2;--accent:#A2695C;--accent2:#C99C8F;
+  --weak:#F6EBE6;--radius:20px;--shadow:0 10px 30px rgba(90,60,40,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.75}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(162,105,92,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#E9E1D9;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:20px;font-weight:600;line-height:1.55;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15.5px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:center;gap:10px}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #D4CCC3;flex:none;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+/* result */
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.qmap{display:block;margin:0 auto}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:86px;flex:none;font-size:14px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#F0E9E2;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:86px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.tcoach{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:23px;font-weight:700}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#41403B;line-height:1.85}
+.tadv{margin:0;padding:0;list-style:none}
+.tadv li{position:relative;padding-left:24px;font-size:14px;color:#554F46;margin-bottom:8px;line-height:1.8}
+.tadv li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:700}
+.note{font-size:13px;color:var(--sub);background:#F7F3EE;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.75}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">ATTACHMENT · 依恋类型</div>
+      <h1>亲密关系依恋类型测试</h1>
+      <p class="lead">依恋理论认为,我们在亲密关系中的「靠近」与「退开」,藏着两股力量:依恋焦虑(怕被丢下)与依恋回避(怕太亲近)。本测试用 24 道原创题目,找到你在两个维度上的位置,并给出属于你的类型报告。</p>
+      <div class="chips">
+        <span class="chip">24 道题</span>
+        <span class="chip">约 4 分钟</span>
+        <span class="chip">四种类型报告</span>
+        <span class="chip">单身也可测</span>
+      </div>
+      <ul class="list">
+        <li>请根据你在亲密关系中的「普遍感受」作答,而不是某一段具体关系</li>
+        <li>目前单身,可以回忆过往恋爱中的典型状态,或想象进入关系后的自己</li>
+        <li>类型不是标签,它会随关系经历与个人成长而变化,没有好坏之分</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">本测试为基于依恋理论的科普性质自评,仅供自我认识参考,不构成心理诊断或专业建议。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 24</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 题目(原创) ===== */
+var A_ITEMS=[
+ {t:"我常担心对方不像我在意他那样在意我",k:1},
+ {t:"对方回复消息慢了,我就会忍不住胡思乱想",k:1},
+ {t:"我需要经常确认「对方依然喜欢我」才能安心",k:1},
+ {t:"一段时间没有联系,我就会感到不安",k:1},
+ {t:"我害怕自己不够好,最终会留不住对方",k:1},
+ {t:"关系里的一点小变化,都会让我担心是不是出了问题",k:1},
+ {t:"我经常担心被抛下、被丢下",k:1},
+ {t:"为了维持关系,我常常付出得比自己能承受的更多",k:1},
+ {t:"对方情绪不好时,我会立刻觉得是不是自己做错了什么",k:1},
+ {t:"我很难真正相信「对方会一直喜欢我」",k:1},
+ {t:"即使对方暂时忙碌,我也能安心过好自己的生活",k:-1},
+ {t:"我基本不担心我们的关系会突然结束",k:-1}
+];
+var V_ITEMS=[
+ {t:"我不太愿意向恋人倾诉心里的脆弱",k:1},
+ {t:"关系太过亲密时,我会想拉开一点距离",k:1},
+ {t:"遇到困难时,我更习惯自己扛,而不是寻求对方帮助",k:1},
+ {t:"依赖别人会让我觉得不太舒服",k:1},
+ {t:"对方说「想谈谈我们的关系」时,我会感到压力、想回避",k:1},
+ {t:"哪怕在最亲密的关系里,我也要保留完全属于自己的空间",k:1},
+ {t:"情绪低落时,我宁愿自己待着,也不想让对方知道",k:1},
+ {t:"太深的亲密感,有时会让我觉得有压力",k:1},
+ {t:"我很少主动跟恋人说起自己的感受和需要",k:1},
+ {t:"当对方频繁需要我的陪伴和回应时,我会觉得有点透不过气",k:1},
+ {t:"向恋人表达我的需求,对我来说是很自然的事",k:-1},
+ {t:"遇到麻烦时,我会自然地依靠身边的人",k:-1}
+];
+var ITEMS=[];
+for(var i=0;i<12;i++){ITEMS.push({t:A_ITEMS[i].t,d:"X",k:A_ITEMS[i].k});ITEMS.push({t:V_ITEMS[i].t,d:"Y",k:V_ITEMS[i].k})}
+var OPTIONS=["非常不符合","不太符合","说不清","比较符合","非常符合"];
+/* ===== 四类型报告 ===== */
+var TYPES={
+ safe:{name:"安全型",tag:"在亲密里,你有一种难得的「稳稳的底气」",color:"#5E8C7A",
+  ps:[
+   ["你在关系里的样子","既能亲近,也能独立。你相信「对方喜欢我」这件事不需要反复验证:享受亲密,也不怕短暂分开;愿意依赖,也不失去自己。需要的时候,你能自然地说出「我今天有点累,想和你说说话」,而不是绕弯子试探。"],
+   ["冲突与修复","你不容易把一次分歧解读成「关系要完了」,更愿意把它当作一个需要一起解决的问题。所以吵完还能好好说话,修复往往很快——这是安全型最珍贵的能力。"],
+   ["你的内心底稿","「我值得被爱,关系总体是安全的。」这份底气让你既能给出稳定的回应,也能接住对方的不安。"],
+   ["这份模式从哪来","可能来自早年比较稳定的照护,也可能来自后天关系中的修复与自我成长——安全型不全是天生的,也可以后来长出来。"]
+  ],
+  adv:["别把「我不需要一直担心」当成理所当然,留意伴侣发出的信号","对焦虑型或回避型的伴侣,你的稳定本身就是很好的容器,但也要照顾自己的边界","关系进入平淡期不是危险信号,给彼此保留各自的节奏"]
+ },
+ anxious:{name:"焦虑型", tag:"你爱得很用力,像雷达一直开着,捕捉每一丝风吹草动",color:"#D98E5F",
+  ps:[
+   ["你在关系里的样子","高浓度的在意,渴望确认,反复检查对方的语气、回复速度和表情;付出常常超过自己能承受的量;一点小变化,内心的警报就会拉响。你想「好好爱」,但常常先累的是自己。"],
+   ["你的内心戏","「我还被爱着吗?我是不是快要被丢下了?」这不是你不讲道理,而是你的依恋系统太灵敏——它把「不确定」直接翻译成了「危险」,于是你本能地想抓得更紧。"],
+   ["这份模式从哪来","早年的回应可能时有时无:只有表现好、足够懂事、足够在意时才被看见。于是你学会了用加倍用力,来换取一份安心。"],
+   ["给这样的你","你不需要改掉「投入」,焦虑的底色里藏着巨大的温柔与在乎。要练的,是给这份温柔装上一条安全带。"]
+  ],
+  adv:["识别警报:当「他是不是不爱我了」冒出来时,先提醒自己「这是我的旧录音,不一定是事实」","延迟反应:想发长篇消息或反复追问时,先等 20 分钟,冲动往往会退潮","直接表达而不是试探:「我今天有点不安,抱一下我就好了」,比冷战和反话有用得多","建立自己的支点:朋友、爱好、事业,让安全感不只系在一个人身上"]
+ },
+ avoidant:{name:"回避型",tag:"你把独立练成了铠甲,靠近之前,先给自己留好退路",color:"#7B8CA6",
+  ps:[
+   ["你在关系里的样子","克制依赖,习惯自己消化情绪;亲密到某个浓度,就本能地想拉开一点距离;比起倾诉,更擅长「自己搞定」。这不代表你不在乎——你和人之间还有话没说完,只是「靠别人」让你不安。"],
+   ["你的内心戏","「靠人不如靠己。一旦太依赖,就会受伤,或者被控制。」你的独立是真的,铠甲也是真的:它保护过你,现在也可能挡住想靠近你的人。"],
+   ["这份模式从哪来","早年表达脆弱时,可能被忽视、被嘲笑,或被要求「懂事、坚强」。你学会把需要收起来,看起来什么都会,什么都能扛。"],
+   ["给这样的你","你不需要变成另一个人。要做的只是:让信任的人,偶尔进来一点点。关系里真正的自由,是「我可以依赖,也可以独立」。"],
+   ["小提醒","回避型的人并非不需要爱,而是用「空间」来表达爱的方式。遇到节奏慢的关系,试着把「退开一下」换成「退开前打个招呼」。"]
+  ],
+  adv:["小步暴露:从「分享一件今天发生的小事」开始,让伴侣慢慢进入你的内部世界","练习说需求:把「我没事」换成「我需要自己待一会儿,晚点找你」","区分「需要空间」与「逃跑冲动」:前者主动约定、滋养关系;后者被动躲开、消耗关系","让伴侣知道你的节奏:「我不是不爱,只是充电方式和别人不太一样」"]
+ },
+ chaotic:{name:"紊乱型",tag:"又想靠近,又怕受伤——心里住着两股方向相反的力量",color:"#B95555",
+  ps:[
+   ["你在关系里的样子","渴望亲密,却在靠近时感到危险;容易在「黏上去」和「推开」之间来回拉扯;情绪来得又急又猛,关系里常出现温度忽高忽低的「过山车」。"],
+   ["你的内心戏","「我很想要爱,但我不确定自己值不值得、安不安全。」当最需要亲近的人,也曾是让你害怕的来源时,「靠近」和「防御」就会同时启动——拉扯不是因为你有问题,而是因为你的警报系统把亲密和危险绑在了一起。"],
+   ["这份模式从哪来","早年的照护可能既给过温暖,也带来过伤害:时好时坏、忽冷忽热。你于是学会了一边渴望、一边防备,来回切换。"],
+   ["给这样的你","你比很多人都更懂得「爱」的重量,也更需要一段安全、稳定、可预期的关系来当练习场。你的拉扯值得被理解,而不是被指责。"]
+  ],
+  adv:["给情绪命名:「我现在很慌,我在害怕被丢下」——把感觉说出口,漩涡就会小一圈","温水式节奏:减少强刺激的关系模式,稳定的日常比过山车更能治愈你","专业支持值得考虑:这类拉扯很难只靠自我调节走完,咨询师可以陪你在一段安全的关系里,重新学一遍「亲密不等于危险」","对当下的自己温柔一点:紊乱不是「有病」,而是受过伤之后,正常的自我保护"]
+ }
+};
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<5;i++){h+='<button class="opt'+(ans[idx]===i+1?" on":"")+'" data-v="'+(i+1)+'"><span class="dot"></span>'+OPTIONS[i]+'</button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var sx=0,sy=0;
+ ITEMS.forEach(function(it,i){var v=ans[i]||3;var s=(it.k>0?v:6-v);if(it.d==="X"){sx+=s}else{sy+=s}});
+ var anx=sx/12,avo=sy/12;
+ var type=(anx<3?0:1)+"-"+(avo<3?0:1);
+ var key={ "0-0":"safe","1-0":"anxious","0-1":"avoidant","1-1":"chaotic" }[type];
+ renderResult(anx,avo,key);
+}
+/* ===== 分布图 ===== */
+function mapSVG(anx,avo,key){
+ var x0=42,x1=296,y0=226,y1=30;
+ var px=x0+(anx-1)/4*(x1-x0);
+ var py=y0-(avo-1)/4*(y0-y1);
+ var mx=x0+(x1-x0)/2,my=(y0+y1)/2;
+ var s='';
+ s+='<rect x="'+x0+'" y="'+y1+'" width="'+(x1-x0)+'" height="'+(y0-y1)+'" fill="#FBF8F5" stroke="#EAE2DA"/>';
+ s+='<line x1="'+mx+'" y1="'+y1+'" x2="'+mx+'" y2="'+y0+'" stroke="#EAE2DA" stroke-width="1"/>';
+ s+='<line x1="'+x0+'" y1="'+my+'" x2="'+x1+'" y2="'+my+'" stroke="#EAE2DA" stroke-width="1"/>';
+ s+='<line x1="'+x0+'" y1="'+py+'" x2="'+px+'" y2="'+py+'" stroke="#C99C8F" stroke-width="1" stroke-dasharray="4 4"/>';
+ s+='<line x1="'+px+'" y1="'+py+'" x2="'+px+'" y2="'+y0+'" stroke="#C99C8F" stroke-width="1" stroke-dasharray="4 4"/>';
+ var q=[
+  {x:x0+8,y:y1+20,a:"start",t:"回避型",k:"avoidant"},
+  {x:x1-8,y:y1+20,a:"end",t:"紊乱型",k:"chaotic"},
+  {x:x0+8,y:y0-10,a:"start",t:"安全型",k:"safe"},
+  {x:x1-8,y:y0-10,a:"end",t:"焦虑型",k:"anxious"}
+ ];
+ q.forEach(function(o){
+  var on=o.k===key;
+  s+='<text x="'+o.x+'" y="'+o.y+'" text-anchor="'+o.a+'" font-size="12.5" font-weight="'+(on?700:400)+'" fill="'+(on?"#8C4A3F":"#B7AEA3")+'">'+o.t+'</text>';
+ });
+ s+='<circle cx="'+px.toFixed(1)+'" cy="'+py.toFixed(1)+'" r="10" fill="rgba(162,105,92,.18)"/>';
+ s+='<circle cx="'+px.toFixed(1)+'" cy="'+py.toFixed(1)+'" r="5" fill="#A2695C" stroke="#fff" stroke-width="2"/>';
+ s+='<text x="'+(x0+(x1-x0)/2)+'" y="'+(y0+20)+'" text-anchor="middle" font-size="12" fill="#9B968B">依恋焦虑 → 高</text>';
+ s+='<text x="'+(x0+(x1-x0)/2)+'" y="'+(y1-12)+'" text-anchor="middle" font-size="12" fill="#9B968B">依恋回避 ↑ 高</text>';
+ return '<svg class="qmap" width="320" height="262" viewBox="0 0 320 262">'+s+'</svg>';
+}
+/* ===== 结果 ===== */
+function renderResult(anx,avo,key){
+ var T=TYPES[key];
+ var h='<div class="rhead"><div class="k">ATTACHMENT · 结果</div><h2>你的依恋类型:'+T.name+'</h2><p>'+T.tag+'</p></div>';
+ h+='<div class="rcard">'+mapSVG(anx,avo,key);
+ h+='<div style="margin-top:6px">';
+ h+='<div class="dimrow"><span class="nm">依恋焦虑</span><span class="track"><i data-w="'+(anx/5*100)+'"></i></span><span class="vl">'+anx.toFixed(1)+' / 5</span></div>';
+ h+='<div class="dimrow"><span class="nm">依恋回避</span><span class="track"><i data-w="'+(avo/5*100)+'"></i></span><span class="vl">'+avo.toFixed(1)+' / 5</span></div>';
+ h+='</div>';
+ h+='<div class="tcoach">依恋焦虑高:在意与怕被丢下的警报比较灵敏;依恋回避高:对深度依赖与亲密有防御。两条虚线的交叉点,就是你在四种类型中的位置。</div></div>';
+ h+='<div class="rcard"><div class="typehead"><div class="tname" style="color:'+T.color+'">'+T.name+'</div><div class="ttag">'+T.tag+'</div></div>';
+ T.ps.forEach(function(sec){h+='<div class="sect"><h4>'+sec[0]+'</h4><p>'+sec[1]+'</p></div>'});
+ h+='<div class="sect"><h4>给你的成长建议</h4><ul class="tadv">';
+ T.adv.forEach(function(a){h+='<li>'+a+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="note">依恋类型不是固定的标签:它与当下这段关系、以及你正在经历的成长阶段都有关系,可能会随时间变化。把它当作一面镜子,而不是一枚印章。</div></div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试题目基于依恋理论原创编写,仅供自我了解参考,不构成心理诊断或专业建议。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>心理测试小站 · 认识你自己</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%233B4A44'/></svg>">
+<style>
+:root{--ink:#26241F;--sub:#6E6A61;--faint:#9B968B;--card:#FFFFFF;--bg1:#F7F4EF;--bg2:#EDEBE4;
+--accent:#3B4A44;--radius:20px;--shadow:0 10px 30px rgba(60,55,40,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);min-height:100vh;color:var(--ink);line-height:1.75;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:620px;margin:0 auto;padding:40px 18px calc(48px + env(safe-area-inset-bottom))}
+.kicker{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600;margin-bottom:10px;text-align:center}
+h1{font-size:28px;text-align:center;line-height:1.4;margin-bottom:10px}
+.lead{color:var(--sub);font-size:14.5px;text-align:center;margin-bottom:30px}
+a.tcard{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);
+box-shadow:var(--shadow);padding:22px 22px 20px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7);
+transition:transform .18s ease,box-shadow .18s ease}
+a.tcard:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(60,55,40,.12)}
+.tcard .top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.tcard .dot{width:10px;height:10px;border-radius:50%;flex:none}
+.tcard h2{font-size:18.5px}
+.tcard .meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+.tcard .m{font-size:12px;color:var(--sub);background:#F3F0EA;border-radius:999px;padding:3px 11px}
+.tcard p{font-size:14px;color:var(--sub);line-height:1.8}
+.tcard .go{margin-top:12px;font-size:14px;font-weight:600;color:var(--accent)}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:26px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">SELF-ASSESSMENT</div>
+  <h1>心理测试小站</h1>
+  <p class="lead">三个轻量心理自测,选一个开始了解自己</p>
+
+  <a class="tcard" href="bigfive.html">
+    <div class="top"><span class="dot" style="background:#37655E"></span><h2>大五人格测试</h2></div>
+    <div class="meta"><span class="m">50 道题</span><span class="m">约 6-8 分钟</span><span class="m">IPIP 官方公开题目</span></div>
+    <p>心理学界公认的人格坐标系:外向性、宜人性、尽责性、情绪稳定性、开放性五个维度,出五维雷达图与逐维度深度解读。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <a class="tcard" href="mood.html">
+    <div class="top"><span class="dot" style="background:#4A6D8C"></span><h2>情绪状态自查(焦虑+抑郁)</h2></div>
+    <div class="meta"><span class="m">16 道题</span><span class="m">约 3 分钟</span><span class="m">GAD-7 + PHQ-9 公有领域量表</span></div>
+    <p>国际通用的双量表筛查:前 7 题看焦虑,后 9 题看抑郁,出分档解读与自助建议,含专业求助渠道提示。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <a class="tcard" href="attachment.html">
+    <div class="top"><span class="dot" style="background:#A2695C"></span><h2>亲密关系依恋类型测试</h2></div>
+    <div class="meta"><span class="m">24 道题</span><span class="m">约 4 分钟</span><span class="m">原创题目</span></div>
+    <p>基于依恋理论:测量依恋焦虑与回避两个维度,在四象限中找到你的位置,输出安全型/焦虑型/回避型/紊乱型深度报告。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <p class="foot">题目分别来自 IPIP 公开题库、GAD-7/PHQ-9 公有领域量表及原创编写。<br>内容仅供自我了解参考,不构成医学或心理诊断。</p>
+</div>
+</body>
+</html>
