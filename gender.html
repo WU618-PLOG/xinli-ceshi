@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>心理性别构成测试 · 20题</title>
+<meta name="description" content="基于双性化理论的20题测试:测量你身上的阳刚特质与阴柔特质配比,给出双性化/阳刚主导/阴柔主导/未分化四种气质构成报告。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%238B5E83'/></svg>">
+<style>
+:root{
+  --ink:#2C2530;--sub:#6E6272;--faint:#A193A6;--line:#EEE2EC;--card:#FFFFFF;
+  --bg1:#FAF5F9;--bg2:#F1E7F0;--accent:#8B5E83;--accent2:#C08AB6;
+  --weak:#F7EDF5;--radius:20px;--shadow:0 10px 30px rgba(130,80,120,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.75}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(139,94,131,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#EDE2EB;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:19.5px;font-weight:600;line-height:1.6;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #DBCCD8;flex:none;margin-top:2px;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:82px;flex:none;font-size:13.5px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#F2EAF1;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:70px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.tcoach{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:24px;font-weight:700}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#3D3440;line-height:1.85}
+.tadv{margin:0;padding:0;list-style:none}
+.tadv li{position:relative;padding-left:24px;font-size:14px;color:#554A58;margin-bottom:8px;line-height:1.8}
+.tadv li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:700}
+.note{font-size:13px;color:var(--sub);background:#F8F3F7;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">GENDER MIND · 心理性别构成</div>
+      <h1>心理性别构成测试</h1>
+      <p class="lead">阳刚与阴柔,从来不是互斥的两个选项。本测试借鉴心理学中的「双性化」理论:每个人身上都同时存在两种气质——目标导向的工具性特质,与关系导向的表达性特质。它们的配比,构成了你独特的心理性别气质。</p>
+      <div class="chips">
+        <span class="chip">20 道题</span>
+        <span class="chip">约 4 分钟</span>
+        <span class="chip">双维度气质坐标</span>
+        <span class="chip">4 型构成报告</span>
+      </div>
+      <ul class="list">
+        <li>题目测量的是「气质特质」,不是生理性别,也与性取向无关</li>
+        <li>请按真实的你作答,而不是「我应该是什么样」</li>
+        <li>四种构成没有好坏之分,双高与单高各有各自的天赋</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">本测试为基于 Bem 双性化理论的科普性原创自评,不评估生理性别与性取向,仅供自我认识参考。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 20</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 题目(原创,基于双性化理论) ===== */
+var M_ITEMS=[
+ "遇到冲突,我倾向于直接面对,当面解决",
+ "做决定时,我更相信逻辑和数据,而不是感觉",
+ "我享受在竞争中胜出的感觉",
+ "压力大的时候,我倾向于自己扛住,不轻易流露脆弱",
+ "我习惯主导局面,而不是跟随别人",
+ "我说话做事比较直接,不太绕弯子",
+ "我在乎的人受委屈时,我有很强的保护欲",
+ "我遇到问题喜欢自己解决,很少开口求助",
+ "面对挑战时,我会比平时更兴奋",
+ "我更看重目标和结果,而不是过程中的感受"
+];
+var F_ITEMS=[
+ "我很容易察觉别人情绪的细微变化",
+ "朋友难过时,我会自然地想去安慰他",
+ "我重视关系中的亲密感与分享",
+ "我容易被电影、音乐或故事打动",
+ "我习惯用言语和细节行动表达关心",
+ "做决定时,我会认真考虑它对他人的影响",
+ "我乐于照顾身边的人,也享受被照顾",
+ "我愿意花时间倾听别人的心事",
+ "我很在意身边环境的氛围,会主动去照顾大家",
+ "我表达情绪比较自然,不太会把感受藏起来"
+];
+var ITEMS=[];
+for(var i=0;i<10;i++){ITEMS.push({t:M_ITEMS[i],d:"M"});ITEMS.push({t:F_ITEMS[i],d:"F"})}
+var OPTIONS=["非常不符合","比较不符合","说不清","比较符合","非常符合"];
+/* ===== 四类型报告 ===== */
+var TYPES={
+ both:{name:"双性化型",tag:"能刚能柔,你的心理构成最完整",color:"#8B5E83",
+  ps:[
+   ["你的气质构成","你有明确的目标感和行动力,也不缺共情与细腻:该拍板时果断,该倾听时耐心;能在会议室里据理力争,也能在朋友崩溃时稳稳递上纸巾。心理学研究发现,双性化的人在心理健康和适应力上往往表现最好——因为你的工具箱里,两套工具都有。"],
+   ["这份构成的珍贵","你不必在「强」与「柔」之间二选一,而是能根据场合自如调用。这不是没有立场,恰恰是心理弹性的体现:柔不是弱,刚也不是冷。你身上那种「什么场合都能接住」的能力,是最稀缺的气质组合。"],
+   ["可以留意的地方","双性化的人有时会承担过多的角色期待:大家默认你既能扛事又能共情,于是把压力都交给你。记得提醒自己:你拥有两套工具,但没有义务时刻把两套都开着。"]
+  ],
+  adv:["你容易被两边的人依赖,别让自己成为万能承接者","明确自己的能量边界:能刚能柔,不等于必须一直刚且柔","把你的弹性用在真正重要的人和事上,而不是所有场合"]
+ },
+ male:{name:"阳刚主导型",tag:"目标清晰、行动优先,这是你的名片",color:"#4A6D8C",
+  ps:[
+   ["你的气质构成","你是典型的目标导向者:遇到问题第一反应是解决,而不是感慨;面对竞争不怵反而兴奋;做决定靠逻辑,行动讲效率。这种清晰有力的风格,让你在需要有人拍板的场合格外可靠。"],
+   ["不是缺点","阳刚主导不等于「不近人情」。很多阳刚主导的人,对在乎的人有极强的保护欲,只是表达方式更偏向「做出来」,而不是「说出来」。你的在意,常常藏在行动里。"],
+   ["可以补充的","工具箱里最值得加固的,是把柔软说出口的能力:对别人,一句「我懂你」;对自己,一句「我允许我累」。锋芒是你的天赋,柔韧会让它更持久。"]
+  ],
+  adv:["练习把「没事」换成一次真实的感受分享","你的直接很珍贵,加半秒停顿,接受度会明显更高","关心别人时,除了解决问题,也可以只是陪着"]
+ },
+ female:{name:"阴柔主导型",tag:"共情细腻,你是人群里的暖流",color:"#C0768C",
+  ps:[
+   ["你的气质构成","你是天生的关系感知者:能读到房间里最细微的情绪变化,记得每个人的喜好与禁忌,在乎别人的感受往往超过在乎输赢。这种能力让你成为关系中的粘合剂,也是很多人愿意向你袒露心事的原因。"],
+   ["不是缺点","阴柔主导不等于「没有主见」。很多阴柔主导的人,在真正重要的事情上立场异常坚定,只是表达方式更温和、更有余地。温柔和坚定完全可以同时存在。"],
+   ["可以补充的","你工具箱里最值得加固的,是把自己的需要也说出来:你的感受和别人的感受同等重要,你的边界值得被听见。先照顾好自己的那杯水,才能继续给别人倒水。"]
+  ],
+  adv:["练习说「我不同意」,不用自动加软化后缀","照顾别人的同时,把自己的需求也列上清单","你的温柔很有力量,记得每天给自己留一份"]
+ },
+ undiff:{name:"未分化型",tag:"特质还在沉睡,你是一张可塑性很强的底稿",color:"#8A8270",
+  ps:[
+   ["你的气质构成","两种特质的分数都不算突出,这并不代表你「没有个性」——更可能说明:你不按常规脚本出牌,或者这些特质还没有被合适的环境唤醒。你更像一张干净的底稿:没有被固定的线条框住,可塑性反而极强。"],
+   ["为什么可能如此","未分化有时与成长环境有关:若是从小被要求「收着点」,人就不敢锋利,也不太敢柔软;也可能你只是天然地拒绝被提前归类。无论哪种,都不是缺陷。"],
+   ["你可以的","气质不是天生的宿命,而是被经历和选择塑造的。你完全可以主动认领一些你想生长的特质:想更果断,就从一次小决定拍板开始;想更细腻,就从一次认真倾听开始。"]
+  ],
+  adv:["回想最近一次让你心里发光的时刻,那里藏着你想要的特质","选一个「不太像你」的小行为练一周,你会重新认识自己","低分化不是空白,是还没有上色的画布"]
+ }
+};
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<5;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span><span>'+OPTIONS[i]+'</span></button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var m=0,f=0;
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v===undefined||v===null){return}if(it.d==="M"){m+=v+1}else{f+=v+1}});
+ renderResult(m,f);
+}
+/* ===== 结果 ===== */
+function renderResult(m,f){
+ var mHigh=m>=30,fHigh=f>=30;
+ var key=mHigh&&fHigh?"both":(mHigh?"male":(fHigh?"female":"undiff"));
+ var T=TYPES[key];
+ var h='<div class="rhead"><div class="k">心理性别构成 · 测试结果</div><h2>你的构成是「'+T.name+'」</h2><p>'+T.tag+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:12px">你的气质坐标(满分 50)</div>';
+ h+='<div class="dimrow"><span class="nm">阳刚特质</span><span class="track"><i data-w="'+(m/50*100)+'"></i></span><span class="vl">'+m+' / 50</span></div>';
+ h+='<div class="dimrow"><span class="nm">阴柔特质</span><span class="track"><i data-w="'+(f/50*100)+'"></i></span><span class="vl">'+f+' / 50</span></div>';
+ h+='<div class="tcoach">参考线:30 分为中位。两项都在 30 分以上为双性化型,单高为单维主导型,双低为未分化型——四种构成没有优劣,只是工具箱的配置不同。</div></div>';
+ h+='<div class="rcard">';
+ h+='<div class="typehead"><div class="tname" style="color:'+T.color+'">'+T.name+'</div><div class="ttag">'+T.tag+'</div></div>';
+ T.ps.forEach(function(sec){h+='<div class="sect"><h4>'+sec[0]+'</h4><p>'+sec[1]+'</p></div>'});
+ h+='<div class="sect"><h4>给这种构成的建议</h4><ul class="tadv">';
+ T.adv.forEach(function(a){h+='<li>'+a+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="note">理论背景:心理学家 Sandra Bem 提出「双性化」(Androgyny)概念,认为阳刚与阴柔是人人都可能拥有的两套特质,而非性别的专属标签。研究表明,同时具备两种特质的人,在面对不同情境时拥有更大的行为弹性。本测试基于该理论的科普化原创改编。</div>';
+ h+='</div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试仅供自我认识参考,不构成心理诊断或专业建议。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

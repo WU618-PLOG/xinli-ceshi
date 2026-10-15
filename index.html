@@ -15,7 +15,8 @@ background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);min-height:100v
 .wrap{max-width:620px;margin:0 auto;padding:40px 18px calc(48px + env(safe-area-inset-bottom))}
 .kicker{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600;margin-bottom:10px;text-align:center}
 h1{font-size:28px;text-align:center;line-height:1.4;margin-bottom:10px}
-.lead{color:var(--sub);font-size:14.5px;text-align:center;margin-bottom:30px}
+.lead{color:var(--sub);font-size:14.5px;text-align:center;margin-bottom:8px}
+.group{font-size:13px;letter-spacing:.2em;color:var(--faint);font-weight:600;margin:28px 0 12px}
 a.tcard{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);
 box-shadow:var(--shadow);padding:22px 22px 20px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7);
 transition:transform .18s ease,box-shadow .18s ease}
@@ -34,7 +35,9 @@ a.tcard:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(60,55,40,.1
 <div class="wrap">
   <div class="kicker">SELF-ASSESSMENT</div>
   <h1>心理测试小站</h1>
-  <p class="lead">三个轻量心理自测,选一个开始了解自己</p>
+  <p class="lead">十款轻量自测,总有一款戳中你</p>
+
+  <div class="group">经典量表</div>
 
   <a class="tcard" href="bigfive.html">
     <div class="top"><span class="dot" style="background:#37655E"></span><h2>大五人格测试</h2></div>
@@ -57,7 +60,60 @@ a.tcard:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(60,55,40,.1
     <div class="go">进入测试 →</div>
   </a>
 
-  <p class="foot">题目分别来自 IPIP 公开题库、GAD-7/PHQ-9 公有领域量表及原创编写。<br>内容仅供自我了解参考,不构成医学或心理诊断。</p>
+  <div class="group">趣味角色</div>
+
+  <a class="tcard" href="konan.html">
+    <div class="top"><span class="dot" style="background:#35507A"></span><h2>名侦探柯南角色性格测试</h2></div>
+    <div class="meta"><span class="m">20 道题</span><span class="m">约 4 分钟</span><span class="m">8 位角色匹配</span></div>
+    <p>20 道情境题,匹配你和柯南、新一、小兰、灰原哀、基德、安室透等 8 位角色的相似度,输出完整匹配度与角色报告。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <a class="tcard" href="xiyou.html">
+    <div class="top"><span class="dot" style="background:#8C6239"></span><h2>西游记角色性格测试</h2></div>
+    <div class="meta"><span class="m">18 道题</span><span class="m">约 4 分钟</span><span class="m">8 位角色匹配</span></div>
+    <p>18 道情境题,看看你身上住着《西游记》里的谁:孙悟空、唐僧、猪八戒、沙僧、白龙马,还是观音、牛魔王、二郎神?</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <a class="tcard" href="fun.html">
+    <div class="top"><span class="dot" style="background:#D97E1F"></span><h2>精神状态大赏</h2></div>
+    <div class="meta"><span class="m">16 道题</span><span class="m">约 3 分钟</span><span class="m">12 种魔性鉴定</span></div>
+    <p>为你的精神状态出具一份不正经鉴定书:已读不回大师、送钱者、深夜哲学家……12 种魔性标签,测完忍不住转发给朋友。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <div class="group">自我探索</div>
+
+  <a class="tcard" href="mask.html">
+    <div class="top"><span class="dot" style="background:#6F6A9C"></span><h2>社会面具测试</h2></div>
+    <div class="meta"><span class="m">20 道题</span><span class="m">约 4 分钟</span><span class="m">面具厚度 + 4 型</span></div>
+    <p>找到你最习惯戴的那副社会面具:微笑营业者、无事发生型、快乐担当还是低功耗模式,并为你量一量面具的厚度。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <a class="tcard" href="gender.html">
+    <div class="top"><span class="dot" style="background:#8B5E83"></span><h2>心理性别构成测试</h2></div>
+    <div class="meta"><span class="m">20 道题</span><span class="m">约 4 分钟</span><span class="m">双维度气质坐标</span></div>
+    <p>基于双性化理论:测量阳刚特质与阴柔特质的配比,在坐标中找到你的气质构成:双性化、阳刚主导、阴柔主导或未分化。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <a class="tcard" href="neihao.html">
+    <div class="top"><span class="dot" style="background:#AE5F63"></span><h2>精神内耗指数测试</h2></div>
+    <div class="meta"><span class="m">20 道题</span><span class="m">约 4 分钟</span><span class="m">内耗指数 + 4 大耗电源</span></div>
+    <p>明明没做什么却总是很累?给你的精神内耗做一次体检:反刍、纠结、讨好、完美四个耗电源逐项读数,找到漏电口,给出省电方案。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <a class="tcard" href="pleaser.html">
+    <div class="top"><span class="dot" style="background:#C78766"></span><h2>讨好型人格测试</h2></div>
+    <div class="meta"><span class="m">20 道题</span><span class="m">约 4 分钟</span><span class="m">讨好指数 + 重建练习</span></div>
+    <p>测算你的讨好指数:拒绝困难、需求后置、过度道歉、认同饥渴四个维度逐项分析,附温和而具体的重建练习清单。</p>
+    <div class="go">进入测试 →</div>
+  </a>
+
+  <p class="foot">题目分别来自 IPIP 公开题库、GAD-7/PHQ-9 公有领域量表及原创编写;角色类测试为趣味演绎。<br>内容仅供自我了解参考,不构成医学或心理诊断。</p>
 </div>
 </body>
 </html>

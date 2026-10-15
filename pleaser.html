@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>讨好型人格测试 · 20题</title>
+<meta name="description" content="20道题测出你的讨好指数:拒绝困难、需求后置、过度道歉、认同饥渴四个维度逐项分析,给出讨好程度报告与重建练习。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23C78766'/></svg>">
+<style>
+:root{
+  --ink:#2F2723;--sub:#74655B;--faint:#A89A8E;--line:#F0E4DA;--card:#FFFFFF;
+  --bg1:#FAF6F2;--bg2:#F3E9E0;--accent:#C78766;--accent2:#E3B394;
+  --weak:#F9EFE7;--radius:20px;--shadow:0 10px 30px rgba(160,110,80,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.75}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(199,135,102,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#EEE1D6;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:19.5px;font-weight:600;line-height:1.6;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15.5px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:center;gap:10px}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #DFCDBE;flex:none;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.big{font-size:44px;font-weight:800;color:var(--accent);line-height:1.2;font-variant-numeric:tabular-nums}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:96px;flex:none;font-size:13.5px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#F6ECE3;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:60px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.dimrow.top .nm{color:var(--accent)}
+.thickbar{height:12px;border-radius:999px;background:#F6ECE3;overflow:hidden;margin:6px 0 12px}
+.thickbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.tcoach{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:23px;font-weight:700}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#453A33;line-height:1.85}
+.tadv{margin:0;padding:0;list-style:none}
+.tadv li{position:relative;padding-left:24px;font-size:14px;color:#5C4F45;margin-bottom:8px;line-height:1.8}
+.tadv li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:700}
+.note{font-size:13px;color:var(--sub);background:#FAF5F0;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">PEOPLE PLEASER · 讨好倾向</div>
+      <h1>讨好型人格测试</h1>
+      <p class="lead">想让所有人满意,是善良,也是一种消耗。这份测试从四个角度测量你的讨好指数:说不出口的「不」、总是排最后的自己、挂在嘴边的对不起,和太在意别人看法的雷达。测完你会更清楚:你的让渡,发生在哪里,值不值得收回。</p>
+      <div class="chips">
+        <span class="chip">20 道题</span>
+        <span class="chip">约 4 分钟</span>
+        <span class="chip">4 个维度分析</span>
+        <span class="chip">重建练习</span>
+      </div>
+      <ul class="list">
+        <li>请按真实反应作答,哪怕答案让你有点不好意思</li>
+        <li>讨好模式不是错,它多半是你曾经学会的生存策略</li>
+        <li>结果包含讨好指数、主要表现与温和的重建练习</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">本测试为科普性原创自评,仅供自我认识参考,不构成心理诊断或专业建议。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 20</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 四个维度 ===== */
+var DIMS=[
+ {key:"ju",name:"拒绝困难",sub:"说不出口的「不」",color:"#C78766",
+  desc:"拒绝对你来说不是一句话,而是一整套心理程序:先想好理由,预演对方会失望的表情,再反复权衡自己是不是太过分。程序还没跑完,「好吧」已经先出口了。",
+  fix:["用缓冲句代替硬撑:「我看下时间,晚点回你」,给自己留出说不的空间","记住:拒绝一个请求,不等于拒绝这个人","从最小的事练起:拒绝一次推销电话,体验「拒绝后天并没有塌」"]},
+ {key:"xu",name:"需求后置",sub:"自己总是排在最后",color:"#B08A4A",
+  desc:"你习惯了先满足所有人,最后才轮到自己。点菜说随便、被问想法说都行、自己的事一拖再拖。时间久了,「我想要什么」变成了一道答不出来的题。",
+  fix:["点菜时说出第一个真实想吃的菜,不再说随便","每天问自己一次:此刻我的需要是什么?哪怕只是「想安静十分钟」","把「我都可以」改成「我倾向 A」,练习拥有偏好"]},
+ {key:"qian",name:"过度道歉",sub:"对不起,是口头禅",color:"#8C6BA8",
+  desc:"你在为不存在的事情道歉:为打扰、为占用时间、为表达需求、甚至为提出一个合理请求。道歉是你的社交润滑剂,但用得太勤,会让你的位置越来越低。",
+  fix:["数一数一天说了几次「对不起」,一半以上换成「谢谢」:「谢谢你等我」胜过「对不起让你等」","区分「我的错」和「不是我的错」,后者不认领","表达需求时不必先道歉:「我想请你帮个忙」就可以直接开头"]},
+ {key:"rentong",name:"认同饥渴",sub:"需要被所有人喜欢",color:"#5E7A6E",
+  desc:"你的情绪常被别人的反馈牵着走:一条没回的消息、一个没点赞的动态、一句含糊的评价,都能让你反复揣测。你想要的其实不是赞美,而是「不被讨厌」的安全感。",
+  fix:["区分事实与偏好:对方只是在表达偏好,你不需要用迎合去消解它","允许有人不喜欢你:用 20% 的被讨厌,换 80% 的做自己,是划算的","每天记一件「没被夸奖、但我做得不错」的事,学会自己给自己发勋章"]}
+];
+/* ===== 题目(原创) ===== */
+var QS={
+ ju:[
+  "别人开口求助,哪怕我也很忙,我也会先答应下来",
+  "拒绝的话在嘴边转了三圈,最后出口的还是「好吧」",
+  "答应之后又开始后悔,但下一次还是会答应",
+  "别人临时提出需求,我会放下自己的事去配合",
+  "有人说「帮个忙呗」,我几乎没说过不"
+ ],
+ xu:[
+  "点菜的时候,我总说「随便」「都行」",
+  "发生矛盾,我先想的是对方的感受",
+  "买东西、做攻略,我也习惯先帮别人挑好",
+  "自己的需求要排到所有人后面,心里才安稳",
+  "被问到「你想要什么」,我常一时答不上来"
+ ],
+ qian:[
+  "「不好意思」是我的口头禅",
+  "明明不是我的错,我也会先道歉",
+  "麻烦别人,哪怕是按规定办事,也会让我有负罪感",
+  "拒绝别人之后,我会找机会补偿回去",
+  "别人一生气,我第一反应是自己做错了什么"
+ ],
+ rentong:[
+  "发消息前会反复斟酌,怕对方觉得我不懂分寸",
+  "如果有人不喜欢我,我会难受很久",
+  "发完动态,会频繁看有没有人回应",
+  "我很难当面表达和对方不同的意见,怕显得不合群",
+  "别人一句否定,能让我怀疑自己一整天"
+ ]
+};
+var ITEMS=[];
+for(var r=0;r<5;r++){DIMS.forEach(function(d){ITEMS.push({t:QS[d.key][r],d:d.key})})}
+var OPTIONS=["从不","偶尔","有时","经常","总是"];
+/* ===== 四档报告 ===== */
+var LVS=[
+ {min:0,name:"基本稳住",color:"#5E8A7A",
+  sum:"你偶尔会让渡自己的感受,但整体上,你守得住自己的位置。",
+  desc:"你的讨好倾向很轻:多数时候你既能体谅别人,也不会把自己搭进去。这份分寸感很珍贵——它意味着你在乎他人,但没有把「被喜欢」当成必须完成的任务。",
+  adv:["把这份平衡保持下去,它比「谁都不顾」和「谁都讨好」都更难得","留意高压场合(职场考核、亲密关系冲突)可能让你短暂回到讨好模式","身边高度讨好的人向你求助时,可以把你的「拒绝经验」分享给他"]},
+ {min:25,name:"轻度讨好",color:"#8C6BA8",
+  sum:"讨好的苗头常有,但你还保留着把自己捞回来的能力。",
+  desc:"你已经能觉察到自己在让渡:有时你会先答应再后悔,有时会把「随便」挂在嘴边,但关键时候,你还能把自己捞回来。这个阶段最值得做的,是把「让渡」变成「选择」——帮,是因为我愿意,不是因为我害怕。",
+  adv:["每次想说「好吧」前,先停顿三秒,问自己:我是愿意,还是不敢?","每周主动做一件「优先自己」的小事,并观察后果","把讨好触发的情境记下来(谁?什么场合?),模式会自己浮出水面"]},
+ {min:50,name:"中度讨好",color:"#C78766",
+  sum:"别人的满意,已经悄悄成了你的 KPI——是时候把考核权收回来了。",
+  desc:"讨好已经渗入你的日常:拒绝需要巨大的心理准备,需求习惯性后置,道歉脱口而出,评价牵动情绪。你维持了很多关系的和谐,代价是自己长期处在「紧绷的得体」里。好消息是:高度觉察是改变的最好起点,而你已经有了。",
+  adv:["每周练习一次「不解释的拒绝」:一句「这次不行,抱歉」就结束,不补充五百字理由","把「他会不会不高兴」换成「这件事我愿不愿意」,再决定","允许一两个小关系先「松动」:那不是失控,是重新校准"]},
+ {min:75,name:"高度讨好",color:"#B25E62",
+  sum:"让别人满意,几乎成了你的本能——哪怕代价是自己长期不舒服。",
+  desc:"讨好已经不是你的选择,而是你的条件反射:别人的情绪比自己的感受先到达,需求刚要出口就被自己按回去,「善良」的外壳下藏着很深的不安。请记住:这不是软弱,这是你曾经为了安全和被爱,认真学会的生存策略;现在,安全的环境换成了你自己,可以开始学新的方式了。",
+  adv:["从语言开始小步重建:一天里至少说一次完整的「我不想」","把「别人满意」从每日目标里划掉,换成「今天我说了几次真心话」","如果讨好伴随明显的焦虑、自我怀疑或关系中的长期委屈,寻求专业心理咨询会是很有力的支持"]}
+];
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<5;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span><span>'+OPTIONS[i]+'</span></button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var ds={},total=0;
+ DIMS.forEach(function(d){ds[d.key]=0});
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v===undefined||v===null){return}ds[it.d]+=v;total+=v});
+ var pct=Math.round(total/(ITEMS.length*4)*100);
+ var order=DIMS.slice().sort(function(a,b){return ds[b.key]-ds[a.key]});
+ renderResult(pct,ds,order);
+}
+/* ===== 结果 ===== */
+function renderResult(pct,ds,order){
+ var lv=LVS[0];
+ for(var i=0;i<LVS.length;i++){if(pct>=LVS[i].min){lv=LVS[i]}}
+ var main=order[0];
+ var h='<div class="rhead"><div class="k">讨好倾向 · 自评报告</div><h2>你的讨好指数是 '+pct+'</h2><p>'+lv.name+'</p></div>';
+ h+='<div class="rcard" style="text-align:center"><div class="big">'+pct+'<span style="font-size:18px;font-weight:600;color:var(--sub)"> / 100</span></div>';
+ h+='<div class="thickbar" style="margin-top:12px"><i data-w="'+pct+'"></i></div>';
+ h+='<p style="font-size:15px;font-weight:600;color:'+lv.color+';text-align:left;line-height:1.8">'+lv.sum+'</p>';
+ h+='<p style="font-size:14.5px;color:#453A33;line-height:1.85;text-align:left;margin-top:8px">'+lv.desc+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:12px">四个维度 · 逐项读数</div>';
+ order.forEach(function(d){var p=Math.round(ds[d.key]/20*100);
+  h+='<div class="dimrow'+(d.key===main.key?" top":"")+'"><span class="nm">'+d.name+'</span><span class="track"><i data-w="'+p+'"></i></span><span class="vl">'+p+'%</span></div>';
+ });
+ h+='<div class="tcoach">读数最高的维度,是你让渡最多的地方——如果想改变,从这里开始最容易看到效果。</div></div>';
+ h+='<div class="rcard"><div class="typehead"><div class="tname" style="color:'+main.color+'">主要表现 · '+main.name+'</div><div class="ttag">'+main.sub+'</div></div>';
+ h+='<div class="sect"><h4>它是怎么发生的</h4><p>'+main.desc+'</p></div>';
+ h+='<div class="sect"><h4>从这里开始松动它</h4><ul class="tadv">';
+ main.fix.forEach(function(f){h+='<li>'+f+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="sect"><h4>「'+lv.name+'」阶段的练习清单</h4><ul class="tadv">';
+ lv.adv.forEach(function(a){h+='<li>'+a+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="note">关于讨好模式:心理学上常把它和「人际顺从」「取悦倾向」联系在一起,它多半形成于早年——当「乖和懂事」是获得认可的主要方式时,讨好就成了安全策略。改变它不需要变得自私,只需要练习一件事:在做决定时,把「我的感受」也放进会议室里,并且给它一个座位。</div>';
+ h+='</div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试仅供自我认识参考,不构成心理诊断或专业建议。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i,.thickbar i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

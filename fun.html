@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>精神状态大赏 · 16题魔性鉴定</title>
+<meta name="description" content="16道题鉴定你的精神状态:已读不回大师、送钱者、深夜哲学家、电子木鱼敲击手……看看你是哪一个。纯娱乐测试。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23E08A2E'/></svg>">
+<style>
+:root{
+  --ink:#2B2620;--sub:#6E6455;--faint:#A0937F;--line:#EBDFC9;--card:#FFFFFF;
+  --bg1:#FBF6EC;--bg2:#F5EBD8;--accent:#D97E1F;--accent2:#F0B95A;
+  --weak:#FCF3E2;--radius:20px;--shadow:0 10px 30px rgba(140,95,30,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.85}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(217,126,31,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#EFE3CC;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:19.5px;font-weight:600;line-height:1.6;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #E2D3B8;flex:none;margin-top:2px;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:132px;flex:none;font-size:13.5px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#F7EEDC;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:52px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.dimrow.top .nm{color:var(--accent)}
+.tcoach{font-size:13px;color:#9A640E;background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:25px;font-weight:800;letter-spacing:.02em}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#3D372E;line-height:1.85}
+.symlist{margin:0;padding:0;list-style:none}
+.symlist li{position:relative;padding-left:24px;font-size:14px;color:#514A3D;margin-bottom:8px;line-height:1.8}
+.symlist li::before{content:"※";position:absolute;left:0;color:var(--accent2);font-size:12px;top:.2em}
+.note{font-size:13.5px;color:var(--sub);background:#FBF5E9;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.8}
+.stamp{text-align:center;color:var(--faint);font-size:12px;letter-spacing:.14em;margin-top:16px}
+.mirror{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:14px 18px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7);flex-wrap:wrap}
+.mirror .mname{font-weight:700;font-size:15px;flex:none}
+.mirror .mtag{font-size:13px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">FUN QUIZ · 精神状态</div>
+      <h1>精神状态大赏</h1>
+      <p class="lead">16 道题,为你的精神状态出具一份不正经鉴定书:可能是「已读不回大师」,可能是「送钱者」,也可能是「深夜哲学家」。成分越多越准,越准越好笑。</p>
+      <div class="chips">
+        <span class="chip">16 道题</span>
+        <span class="chip">约 3 分钟</span>
+        <span class="chip">12 种魔性鉴定</span>
+        <span class="chip">魔性成分表</span>
+      </div>
+      <ul class="list">
+        <li>别思考,凭本能选,思考就输了</li>
+        <li>鉴定结果仅供娱乐,请勿对号入座(对号入座也行)</li>
+        <li>适合转给朋友互相鉴定,快乐加倍</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始鉴定</button>
+      <p class="foot">本测试纯属娱乐,鉴定结果不具备任何医学或心理效力;如果看笑了,记得转发给朋友。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 16</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 标签池 ===== */
+var TAGS=["yidu","atm","philo","muyu","emo","pengyou","coffee","tuoyan","ganfan","niuza","phone","shuimian"];
+var TAG_INFO={
+ yidu:{name:"已读不回大师",tag:"消息不是不回,是社交电量只够撑到点开那一下",color:"#8C7BB5",rarity:8,
+  sym:["点开消息的瞬间就想好了回复,然后忘了回","回一句「嗯嗯」的心理成本,堪比写毕业论文","深夜想起三条没回的消息,良心痛了 0.5 秒,继续没回"],
+  note:"经鉴定,此人并非高冷,而是社交电量天生 20% 起步。已读不回不是没礼貌,是省电模式的自我保护。",
+  tip:"把没回的消息合并成一句「刚看到」批量处理,功德 +1"},
+ atm:{name:"送钱者 ATM-er",tag:"钱包是薛定谔的:打开前以为有钱,打开后确实没了",color:"#D98E5F",rarity:11,
+  sym:["抢单的手速,比抢演唱会门票还快","看到「仅剩 3 件」就开始心跳加速","月底对着账单沉默,然后奖励自己一杯奶茶"],
+  note:"经鉴定,此人的钱不是花掉的,是「支付」掉的:支付了情绪价值、友情维持费和凌晨两点的冲动税。",
+  tip:"购物车放 24 小时再结算,你会发现 80% 都不想要了"},
+ philo:{name:"深夜哲学家",tag:"白天是情绪稳定的成年人,凌晨两点是思考人生的哲学家",color:"#5B6B8C",rarity:7,
+  sym:["凌晨一点思考宇宙的尽头,凌晨两点思考我为什么是我","白天对一切说「都行」,深夜对一切说「可是为什么呢」","一天中最清醒的时刻,永远在最该睡觉的时刻"],
+  note:"经鉴定,此人拥有白天/夜晚双系统:白天运行社会人格,深夜启动哲学内核。发出去没人懂,删了又可惜。",
+  tip:"迸出灵感时写进备忘录,别发朋友圈,醒来你会感谢我"},
+ muyu:{name:"电子木鱼敲击手",tag:"焦虑,但敲木鱼;生气,但敲木鱼;一切皆可敲木鱼",color:"#6E9A8C",rarity:8,
+  sym:["收藏夹里躺着十个「十分钟冥想」教程,一个没打开","上次认真深呼吸,是为了憋住一句想骂人的话","手机里存着白噪音,其实从没播放过"],
+  note:"经鉴定,此人已把人生频道调成「敲敲更健康」:烦恼没有被解决,但敲着敲着,好像也没那么重要了。",
+  tip:"木鱼可以继续敲,但把「随缘」用在对别人的期待上,效果更佳"},
+ emo:{name:"emo 艺术家",tag:"情绪浓度比咖啡还高,并且自带复古滤镜",color:"#B06A9C",rarity:10,
+  sym:["下雨天单曲循环,感觉自己活在一部文艺片里","深夜删朋友圈,白天发「我没事」","情绪来得快去得也快,和龙卷风同理"],
+  note:"经鉴定,此人情绪雷达灵敏度超标:别人一句「哦」,能脑补出一部连续剧。但正是这份浓度,让此人比别人更懂温柔。",
+  tip:"emo 的时候不做重大决定,也不在凌晨发任何文案"},
+ pengyou:{name:"朋友圈特工",tag:"发一条朋友圈的分组设置,比情报工作还精密",color:"#7B8CA6",rarity:6,
+  sym:["同事组、家人组、死党组,看到的我完全是三个人","文案改八遍,发出后十分钟改为仅自己可见","给暗恋对象点赞前,先研究共同好友可不可见"],
+  note:"经鉴定,此人拥有特种兵级别的信息披露系统:对外永远是精装修形象,毛坯房只给极少数人参观。",
+  tip:"偶尔发一条不分组、不加滤镜的内容,你会发现根本没人细看"},
+ coffee:{name:"咖啡因驱动体",tag:"不是喜欢咖啡,是血液里流淌的就是咖啡",color:"#A6711F",rarity:12,
+  sym:["上午靠美式续命,下午靠拿铁续命,晚上靠奶茶续命","喝咖啡是为了不困,困了继续喝咖啡","上次睡得很好,想不起来是哪年"],
+  note:"经鉴定,此人体内的咖啡因代谢系统已升级为供能系统:没有咖啡的早晨,相当于没有开机键的手机。",
+  tip:"下午三点后改喝低因的,给晚上的自己积点德"},
+ tuoyan:{name:"拖延症晚期患者",tag:"不是不想做,是觉得「再等等,灵感它自己会来」",color:"#C9764A",rarity:14,
+  sym:["距离 DDL 一周:还早;一天:还早;三小时:慌了","把待办清单写好的那一刻,感觉已经完成了一半","「明天开始」说了三年,明天从未到来"],
+  note:"经鉴定,此人时间管理能力堪称神迹:用 3 小时完成别人 3 天的活,前 2.8 天用来做心理建设。",
+  tip:"把「明天做」改成「先做 5 分钟」,魔法往往发生在第 5 分钟"},
+ ganfan:{name:"干饭机器人",tag:"人生无常,唯有干饭,永远是刚需",color:"#B5793A",rarity:12,
+  sym:["上午十点开始想中午吃什么,下午三点开始想晚上吃什么","收藏了 200 家店,还没去过 5 家","生气时需要吃东西冷静,冷静后又因为吃多了生气"],
+  note:"经鉴定,此人的情绪系统是饭点驱动的:饭前是饿怒症,饭后是哲学家。干饭,是唯一稳定的热爱。",
+  tip:"干饭前拍一张,一年后它就是最好的生活记录"},
+ niuza:{name:"社交牛杂症",tag:"在社牛和社恐之间反复横跳,薛定谔的社交状态",color:"#C2455E",rarity:15,
+  sym:["在熟人面前是气氛组,在陌生人面前是静音键","上一秒说「包在我身上」,下一秒躲在角落充电","可以做单口相声,也可以在电梯里假装看手机"],
+  note:"经鉴定,此人的社交状态取决于环境与电量:社牛是表演,社恐才是本体,演出结束后需要独处两小时回血。",
+  tip:"赴约前给社交留好「撤退时间」,你会玩得更尽兴"},
+ phone:{name:"手机抚养人",tag:"手机不是工具,是需要随身抚养的电子生命体",color:"#4A7A8C",rarity:13,
+  sym:["手机离开手边的 3 分钟里,已经找了两遍","吃饭、上厕所、睡前,与手机皆是形影不离","电量低于 30% 就开始焦虑,比关心自己还上心"],
+  note:"经鉴定,此人与手机已形成共生关系:手机负责提供多巴胺,此人负责提供充电宝和全部陪伴。",
+  tip:"每天给手机设一个「午睡时间」,它歇你也歇"},
+ shuimian:{name:"睡眠负债人",tag:"觉是想睡的,手机是要刷的,人生是欠费的",color:"#5E6E9C",rarity:14,
+  sym:["「今晚一定早睡」是每日固定节目,与「明天再说」并列","周末补觉 12 小时,醒来还是困","梦里都在打卡上班,醒来更累了"],
+  note:"经鉴定,此人的睡眠账户长期赤字,还试图用周末偿还利息,越还越亏。一天欠一小时,一年欠一个灵魂。",
+  tip:"把充电器挪到客厅,物理隔离是最好的助眠剂"}
+};
+/* ===== 题目(原创) ===== */
+var ITEMS=[
+ {t:"凌晨两点,你的手机屏幕还亮着,因为你在——",
+  o:["思考宇宙的尽头,和我为什么是我","刷短视频,「再看最后一个就睡」是当代最大谎言","赶明天要交的东西,人在夜里生产力暴涨","早就睡了,梦里都在打卡上班"],
+  w:[{philo:2,emo:1},{phone:2,shuimian:1},{tuoyan:2,coffee:1},{shuimian:2,ganfan:1}]},
+ {t:"朋友发来一段 59 秒的语音,你——",
+  o:["转文字,扫一眼,回个「哈哈」","先放着,等「有精力的时候」认真听,一等就是三天","当场听完,还要回一段 60 秒的,誓不认输","听完开始认真研究:这家店在哪,晚上去哪吃"],
+  w:[{yidu:2,phone:1},{tuoyan:2,yidu:1},{niuza:2,emo:1},{ganfan:2,atm:1}]},
+ {t:"你的手机相册里,最占内存的是——",
+  o:["购物车截图、聊天记录截图、各种「不放心截一下」","天空、云、路灯、咖啡杯,九宫格发不下","原图 300 张,精修发圈的 3 张","美食特写,吃前先拍照是基本仪式"],
+  w:[{phone:2,atm:1},{emo:2,pengyou:1},{pengyou:2,phone:1},{ganfan:2,muyu:1}]},
+ {t:"一个陌生号码来电,你会——",
+  o:["不接,看着它响完,然后去搜一下这个号码是谁","接,顺手把事情聊完,还能顺带寒暄两句","是外卖就接;是人,再想想","手机常年静音,来电全凭缘分"],
+  w:[{yidu:2,phone:1},{niuza:2,atm:1},{ganfan:2,muyu:1},{phone:2,shuimian:1}]},
+ {t:"你购物车里最舍不得删的是——",
+  o:["「买来就会开始自律」的健身器材和学习课","一堆「限量」「联名」「最后一天」","冥想会员、白噪音 App、助眠香薰","凑满减拼单用的零食大礼包"],
+  w:[{atm:2,tuoyan:1},{atm:2,emo:1},{muyu:2,shuimian:1},{ganfan:2,phone:1}]},
+ {t:"周五下班的那一刻,你的内心是——",
+  o:["解脱!今晚先通宵刷剧刷手机,明天再补觉","安静!终于可以一个人待着,谁也别找我","兴奋!约人吃饭,这周辛苦钱了","平静,并在工位上认真研究晚上吃什么"],
+  w:[{phone:2,shuimian:1},{yidu:2,muyu:1},{niuza:2,atm:1},{ganfan:2,tuoyan:1}]},
+ {t:"你的微信,最真实的样子是——",
+  o:["消息 99+,红点随便亮,已经麻了","每条都回,而且要回得得体、周到","分组玩得溜:同事、家人、死党,各有各的版本","部分「等会回」的消息,已经等了一星期"],
+  w:[{phone:2,yidu:1},{niuza:2,muyu:1},{pengyou:2,phone:1},{yidu:2,tuoyan:1}]},
+ {t:"「自律」这个词,在你的字典里——",
+  o:["收藏夹里的 100 个教程,就是我的自律","我可以自律,但只在「正式开始」那天,也就是明天","我的自律都用在正经事上:比如每天准时干饭","自律太贵,我选择咖啡续命,把作息往后拖"],
+  w:[{tuoyan:2,muyu:1},{muyu:2,tuoyan:1},{ganfan:2,niuza:1},{coffee:2,phone:1}]},
+ {t:"发一条朋友圈,你的流程是——",
+  o:["想发,写文案,删掉,再写,最后没发","分组可见设置好,配图检查三遍,两小时后发出","拍都拍了,发就发了,爱看不看","最近一条朋友圈,还是上个月转的链接"],
+  w:[{yidu:2,emo:1},{pengyou:2,phone:1},{emo:2,niuza:1},{muyu:2,yidu:1}]},
+ {t:"深夜 emo 的时候,你会——",
+  o:["单曲循环一首歌,感觉全世界都欠我一个拥抱","打开购物软件,用下单代替流泪","找朋友深夜倾诉,第二天后悔说了太多","敲木鱼、深呼吸、看解压视频,主打一个随缘"],
+  w:[{emo:2,philo:1},{atm:2,phone:1},{niuza:2,emo:1},{muyu:2,shuimian:1}]},
+ {t:"你最常对自己说的话是——",
+  o:["「等会再说」——然后没有等会了","「明天开始」——明天的我也是这么想的","「再玩五分钟手机」——五分钟后:再五分钟","「钱没了可以再赚」——其实心在滴血"],
+  w:[{tuoyan:2,yidu:1},{tuoyan:2,philo:1},{phone:2,coffee:1},{atm:2,ganfan:1}]},
+ {t:"和好友约饭,人到齐前你在——",
+  o:["刷手机,虽然五分钟前刚刷过","点好菜了,顺便把宵夜的店也选好了","早早到场占好位置,主打一个靠谱","迟到了,正在群里发「马上到」(其实刚出门)"],
+  w:[{phone:2,yidu:1},{ganfan:2,atm:1},{niuza:2,ganfan:1},{tuoyan:2,shuimian:1}]},
+ {t:"月底看账单那一刻,你的反应——",
+  o:["心一横,关掉,下月再战","逐条核对,总有几笔「我怎么不记得花过」","截图发给朋友吐槽半天,然后约饭压压惊","问题不大,下个月的我自然会处理"],
+  w:[{atm:2,muyu:1},{atm:2,philo:1},{emo:2,niuza:1},{tuoyan:2,muyu:1}]},
+ {t:"你的深夜歌单里都是——",
+  o:["让灵魂共振的诗与远方","燃向神曲,半夜也要保持战斗力","催泪之歌,做自己的情感片导演","白噪音、雨声,助眠专区"],
+  w:[{philo:2,emo:1},{coffee:2,phone:1},{emo:2,philo:1},{muyu:2,shuimian:1}]},
+ {t:"早上闹钟响到第五遍时,你——",
+  o:["已经在吃早餐了,早睡早起是信仰","再睡五分钟,如此循环八次","摸到手机开始刷,反正也迟到了","一杯咖啡下肚,开始回昨晚漏回的消息"],
+  w:[{muyu:2,ganfan:1},{shuimian:2,tuoyan:1},{phone:2,yidu:1},{coffee:2,yidu:1}]},
+ {t:"「周末计划」的实际执行情况——",
+  o:["计划九点起,实际十二点起,午饭后周末已过半","清单写得很丰满,执行全靠缘分","该干饭干饭,该出门出门,执行力还在线","计划就是:不回消息,不社交,和手机安静相处"],
+  w:[{shuimian:2,tuoyan:1},{tuoyan:2,philo:1},{ganfan:2,niuza:1},{yidu:2,phone:1}]}
+];
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<4;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span><span>'+q.o[i]+'</span></button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var sc={},mx={};
+ TAGS.forEach(function(c){sc[c]=0;mx[c]=0});
+ ITEMS.forEach(function(it){it.w.forEach(function(map){for(var k in map){mx[k]+=map[k]}})});
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v===undefined||v===null){return}var map=it.w[v];for(var k in map){sc[k]+=map[k]}});
+ var order=TAGS.slice().sort(function(a,b){return sc[b]/mx[b]-sc[a]/mx[a]});
+ renderResult(order,sc,mx);
+}
+/* ===== 结果 ===== */
+function renderResult(order,sc,mx){
+ var top=order[0],second=order[1];
+ var T=TAG_INFO[top];
+ var h='<div class="rhead"><div class="k">精神状态大赏 · 鉴定结果</div><h2>你是「'+T.name+'」</h2><p>'+T.tag+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:12px">你的精神成分表(前六)</div>';
+ order.slice(0,6).forEach(function(c){var p=Math.round(sc[c]/mx[c]*100);
+  h+='<div class="dimrow'+(c===top?" top":"")+'"><span class="nm">'+TAG_INFO[c].name+'</span><span class="track"><i data-w="'+p+'"></i></span><span class="vl">'+p+'%</span></div>';
+ });
+ h+='<div class="tcoach">稀有度参考:该状态在答题人群中约占 '+T.rarity+'%(数据纯属娱乐)</div></div>';
+ h+='<div class="mirror"><span class="mname" style="color:'+TAG_INFO[second].color+'">第二成分 · '+TAG_INFO[second].name+'</span><span class="mtag">'+TAG_INFO[second].tag+'</span></div>';
+ h+='<div class="rcard">';
+ h+='<div class="typehead"><div class="tname" style="color:'+T.color+'">'+T.name+'</div><div class="ttag">'+T.tag+'</div></div>';
+ h+='<div class="sect"><h4>主要症状</h4><ul class="symlist">';
+ T.sym.forEach(function(s){h+='<li>'+s+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="sect"><h4>鉴定意见</h4><p>'+T.note+'</p></div>';
+ h+='<div class="note">友情提示:'+T.tip+'</div>';
+ h+='<div class="stamp">—— 精神状态大赏鉴定委员会(非正式)· 仅供娱乐 ——</div>';
+ h+='</div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新鉴定</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试纯属娱乐,结果不具备任何医学或心理效力,认真就输了。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

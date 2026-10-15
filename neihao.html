@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>精神内耗指数测试 · 20题</title>
+<meta name="description" content="20道题测出你的精神内耗指数:反刍、纠结、讨好、完美四个耗电源逐项体检,给出内耗分档、主要耗损源与针对性的省电方案。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23AE5F63'/></svg>">
+<style>
+:root{
+  --ink:#2E2527;--sub:#726267;--faint:#A79AA0;--line:#F0E2E3;--card:#FFFFFF;
+  --bg1:#FAF5F5;--bg2:#F3E8E9;--accent:#AE5F63;--accent2:#D69AA0;
+  --weak:#F9EDEE;--radius:20px;--shadow:0 10px 30px rgba(150,90,95,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.75}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(174,95,99,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#EEDFDF;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:19.5px;font-weight:600;line-height:1.6;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15.5px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:center;gap:10px}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #DECBCB;flex:none;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.big{font-size:44px;font-weight:800;color:var(--accent);line-height:1.2;font-variant-numeric:tabular-nums}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:104px;flex:none;font-size:13.5px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#F5E9E9;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:66px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.dimrow.top .nm{color:var(--accent)}
+.thickbar{height:12px;border-radius:999px;background:#F5E9E9;overflow:hidden;margin:6px 0 12px}
+.thickbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.tcoach{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:23px;font-weight:700}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#403538;line-height:1.85}
+.tadv{margin:0;padding:0;list-style:none}
+.tadv li{position:relative;padding-left:24px;font-size:14px;color:#5A4C4F;margin-bottom:8px;line-height:1.8}
+.tadv li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:700}
+.note{font-size:13px;color:var(--sub);background:#FAF4F4;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">INNER FRICTION · 精神内耗</div>
+      <h1>精神内耗指数测试</h1>
+      <p class="lead">明明没做什么,却总是很累?内耗是那些「没被看见的运算」:过去的事在回放,没做的决定在拉扯,别人的目光在扫描,自己的标准在追赶。20 道题,给你的内耗做一次体检——先找到漏电的地方,才谈得上省电。</p>
+      <div class="chips">
+        <span class="chip">20 道题</span>
+        <span class="chip">约 4 分钟</span>
+        <span class="chip">四个耗电源体检</span>
+        <span class="chip">省电方案</span>
+      </div>
+      <ul class="list">
+        <li>请按最近一个月的真实状态作答,而不是理想中的你</li>
+        <li>内耗不是缺点,它常常和认真、负责、在乎有关,只是需要管理</li>
+        <li>结果包含内耗指数、分档报告与主要耗损源分析</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">本测试为科普性原创自评,仅供自我认识参考,不构成心理诊断或专业建议。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 20</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 四个耗电源 ===== */
+var DIMS=[
+ {key:"fanchu",name:"反刍式耗电",sub:"回放",color:"#8C6BA8",
+  desc:"你的主要耗损发生在「回放」上:发生的事情被一次次调出来重看,对话逐句重审,表情逐一分析。回放改变不了过去,却会实打实地花掉现在的电量。",
+  fix:["给回放设「播放时段」:每天固定 15 分钟想明白,其余时间冒出来就先记下来","把「我是不是说错了」换成「对方其实没空琢磨那么多」","写下来。文字会逼着脑内的循环停下来"]},
+ {key:"jiujie",name:"岔路口耗电",sub:"纠结",color:"#B08A4A",
+  desc:"你的电主要花在「选择」上:选之前反复权衡,选之后反复复盘,每个路口都要掉一格电。你不是优柔寡断,只是把每个选择的分量都背在了身上。",
+  fix:["小事设 1 分钟时限,大事设 1 天,到点必须选,选了就不回头复盘","用「10-10-10」检验:10 分钟后、10 个月后、10 年后,这件事还重要吗","接受「差不多好」:70 分的决定加执行,往往胜过 100 分的纠结"]},
+ {key:"taohao",name:"信号灯耗电",sub:"讨好",color:"#C06A7E",
+  desc:"你的电主要漏在「扫描别人」上:一直在读取别人的表情、语气和期待,然后调整自己。这台雷达 24 小时开着,像后台常驻的高耗电应用,而你往往甚至没意识到它开着。",
+  fix:["区分「对方的要求」和「我脑补的要求」:他明确说了吗?还是我以为?","练习一次不带解释的拒绝,你会发现对方比想象中平静","把「他会不会不高兴」换成「我此刻是不是舒服」"]},
+ {key:"wanmei",name:"涂改液耗电",sub:"完美",color:"#5E7A6E",
+  desc:"你的电主要花在「修改」上:一遍遍打磨,一遍遍不满意,标准高到永远打不到满分。对自己严格本身不是坏事,但反复涂改的每一笔,都在偷偷扣你的电。",
+  fix:["给事情设「及格线」而不是「满分线」,过了及格线就交付","先完成,再完美:初稿逻辑是「能跑就行」","每天记一件「已经够好了」的事,训练满意的能力"]}
+];
+/* ===== 题目(原创) ===== */
+var QS={
+ fanchu:[
+  "白天说错的一句话,晚上躺床上还会反复回放",
+  "别人一个普通的眼神或语气,我会琢磨半天是不是针对我",
+  "过去的尴尬场景,会在脑子里不定期自动重播",
+  "睡前最容易想起各种「当时要是那样说就好了」",
+  "发出去的消息,我会反复回看,担心说得不合适"
+ ],
+ jiujie:[
+  "两件都行的小事(吃什么、买哪件),我也要纠结很久",
+  "做完决定后,我还会反复想「另一个选择是不是更好」",
+  "买东西前我要对比很多家、看大量测评才敢下单",
+  "大家让我负责点菜或拍板时,我会感到压力",
+  "拒绝还是答应,我能在心里拉扯一整天"
+ ],
+ taohao:[
+  "说话前,我会先在心里过一遍「对方会怎么想」",
+  "拒绝别人之后,我会不安很久,总想找机会补偿",
+  "我经常为了不让别人失望,接下本不想做的事",
+  "发在群里的消息没人回,我会怀疑是不是自己说错了话",
+  "别人情绪不好时,我会先检讨是不是我的问题"
+ ],
+ wanmei:[
+  "发布或提交前,我会反复修改,总觉得还不够好",
+  "事情做到 90 分,我更容易盯着差的 10 分",
+  "如果一件事没把握做好,我宁愿不开始",
+  "别人夸我时,我心里觉得「他们只是没看到我的问题」",
+  "休息的时候,我会因为「今天没做什么」而愧疚"
+ ]
+};
+var ITEMS=[];
+for(var r=0;r<5;r++){DIMS.forEach(function(d){ITEMS.push({t:QS[d.key][r],d:d.key})})}
+var OPTIONS=["从不","偶尔","有时","经常","总是"];
+/* ===== 四档报告 ===== */
+var LVS=[
+ {min:0,name:"节能模式",tag:"你的后台很干净,电量基本用在了正事上",color:"#5E8C7A",
+  desc:"你的内耗处于很低的水平:过去的事不太回放,做了决定就不反复复盘,别人的目光对你的电量影响有限。你把能量留给了向前的行动,而不是向内的拉扯。这是很珍贵的状态,不是「心大」,是思维模式足够清爽。",
+  adv:["把这份松弛当作优势,别因内卷氛围就怀疑自己「不够上进」","高内耗的人向你倾诉时,别说「想开点」,安静陪着就很有用","留意重压期(换工作、搬家)内耗也会悄悄升高,及时觉察"]},
+ {min:35,name:"正常待机",tag:"有一点耗电,但整体运行流畅",color:"#8C6BA8",
+  desc:"你偶尔会回放、会纠结、会在意别人的看法,但这些不会长期霸占你的注意力。该想清楚的事你会想清楚,想不清楚的,你也能暂时放下。这个水平的内耗,更像是认真生活的正常代价,而不是问题。",
+  adv:["把「想不通就先放着」变成口头禅,很多事会自己给出答案","睡前半小时远离手机,减少深夜回放的燃料","每周做一次「担心盘点」:上周担心的事,有几件真的发生了?"]},
+ {min:55,name:"后台过载",tag:"后台程序有点多,电量掉得比预想快",color:"#B08A4A",
+  desc:"你的一天常常是这样:事情没做多少,心却很累。过去的话在回放,没做的事在预演,别人的表情在解析——这些「没被看见的运算」偷走了你大半的电量。你不是懒,也不是矫情,只是后台开得太多,该清理一下了。",
+  adv:["给纠结设时限:小事 1 分钟,大事 1 天,到点必须选","把「他是不是对我有意见」换成「这是事实,还是我的推测?」","每天给回放留 15 分钟专属时段,其他时间想起来就记下,留给那个时段"]},
+ {min:75,name:"电量告急",tag:"先别撑了,这些电本来就不该这么用",color:"#AE5F63",
+  desc:"你的内耗已经到了明显影响状态的程度:晚上难以关机,白天启动缓慢,明明什么都没做就疲惫不堪。这不是你的错——高敏感、高责任心的人,天生更容易这样运转。但电量是可以重新分配的,从今天开始,只做一件事:给后台做减法。",
+  adv:["优先做减法而不是加法:每天允许自己少操一件心","把大问题拆成今天能做的一小步,别在脑内演完整部剧","如果长期疲惫影响了睡眠和食欲,试着和信任的人聊聊,或寻求专业帮助"]}
+];
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<5;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span><span>'+OPTIONS[i]+'</span></button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var ds={},total=0;
+ DIMS.forEach(function(d){ds[d.key]=0});
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v===undefined||v===null){return}ds[it.d]+=v;total+=v});
+ var pct=Math.round(total/(ITEMS.length*4)*100);
+ var order=DIMS.slice().sort(function(a,b){return ds[b.key]-ds[a.key]});
+ renderResult(pct,ds,order);
+}
+/* ===== 结果 ===== */
+function renderResult(pct,ds,order){
+ var lv=LVS[0];
+ for(var i=0;i<LVS.length;i++){if(pct>=LVS[i].min){lv=LVS[i]}}
+ var main=order[0];
+ var h='<div class="rhead"><div class="k">精神内耗 · 体检报告</div><h2>你的内耗指数是 '+pct+'</h2><p>'+lv.name+' · '+lv.tag+'</p></div>';
+ h+='<div class="rcard" style="text-align:center"><div class="big">'+pct+'<span style="font-size:18px;font-weight:600;color:var(--sub)"> / 100</span></div>';
+ h+='<div class="thickbar" style="margin-top:12px"><i data-w="'+pct+'"></i></div>';
+ h+='<p style="font-size:14.5px;color:#403538;line-height:1.85;text-align:left">'+lv.desc+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:12px">四个耗电源 · 逐项读数</div>';
+ order.forEach(function(d){var p=Math.round(ds[d.key]/20*100);
+  h+='<div class="dimrow'+(d.key===main.key?" top":"")+'"><span class="nm">'+d.name+'</span><span class="track"><i data-w="'+p+'"></i></span><span class="vl">'+p+'%</span></div>';
+ });
+ h+='<div class="tcoach">读数最高的那一项,是你当前最大的漏电口——省电从堵住它开始。</div></div>';
+ h+='<div class="rcard"><div class="typehead"><div class="tname" style="color:'+main.color+'">主要耗损源 · '+main.name+'</div><div class="ttag">「'+main.sub+'」是你最近掉电最快的地方</div></div>';
+ h+='<div class="sect"><h4>它是怎么耗掉你的</h4><p>'+main.desc+'</p></div>';
+ h+='<div class="sect"><h4>堵住这个漏电口</h4><ul class="tadv">';
+ main.fix.forEach(function(f){h+='<li>'+f+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="sect"><h4>「'+lv.name+'」阶段的省电建议</h4><ul class="tadv">';
+ lv.adv.forEach(function(a){h+='<li>'+a+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="note">关于内耗:心理学上与之最接近的概念是「反刍思维」(Rumination)——反复咀嚼负面内容却得不到进展。它常常与高敏感、高责任心相伴:你在乎,所以才会反复想。管理的目标不是变得麻木,而是把电量从「空转」挪到「前进」上。</div>';
+ h+='</div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试仅供自我认识参考,不构成心理诊断或专业建议;如果长期被疲惫与反刍困扰,寻求专业帮助是勇敢的选择。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i,.thickbar i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

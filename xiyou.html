@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>西游记角色性格测试 · 18题</title>
+<meta name="description" content="18道情境题,匹配你和《西游记》角色的相似度:孙悟空、唐僧、猪八戒、沙僧、白龙马、观音、牛魔王、二郎神,输出复合匹配结果与角色报告。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%238C6239'/></svg>">
+<style>
+:root{
+  --ink:#2B2520;--sub:#6E6155;--faint:#A29283;--line:#EDE1D2;--card:#FFFFFF;
+  --bg1:#FAF6EF;--bg2:#F2E9DA;--accent:#8C6239;--accent2:#C0965F;
+  --weak:#F8F0E4;--radius:20px;--shadow:0 10px 30px rgba(120,85,45,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.8}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(140,98,57,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#EDDFCB;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:19.5px;font-weight:600;line-height:1.6;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #DDCBB2;flex:none;margin-top:2px;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:96px;flex:none;font-size:14px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#F4EBDD;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:56px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.dimrow.top .nm{color:var(--accent)}
+.tcoach{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:24px;font-weight:700}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#3F382F;line-height:1.85}
+.tadv{margin:0;padding:0;list-style:none}
+.tadv li{position:relative;padding-left:24px;font-size:14px;color:#55493D;margin-bottom:8px;line-height:1.8}
+.tadv li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:700}
+.note{font-size:13px;color:var(--sub);background:#F9F4EC;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.75}
+.mirror{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:14px 18px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7);flex-wrap:wrap}
+.mirror .mname{font-weight:700;font-size:15px;flex:none}
+.mirror .mtag{font-size:13px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">JOURNEY · 西游角色</div>
+      <h1>西游记角色性格测试</h1>
+      <p class="lead">18 道情境题,看看你身上住着《西游记》里的谁——是敢作敢当的孙悟空,还是目标坚定的唐僧?是自带人间烟火的猪八戒,还是低调可靠的沙僧?做完你会看到与 8 位角色的完整匹配度,以及属于你的角色报告。</p>
+      <div class="chips">
+        <span class="chip">18 道题</span>
+        <span class="chip">约 4 分钟</span>
+        <span class="chip">8 位角色匹配</span>
+        <span class="chip">复合结果</span>
+      </div>
+      <ul class="list">
+        <li>凭第一直觉作答,越真实越准</li>
+        <li>结果会同时展示最高匹配与第二匹配,你可能兼具两种气质</li>
+        <li>本测试为古典名著角色的趣味演绎,仅供娱乐</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">本测试基于《西游记》古典名著角色的趣味演绎,仅供娱乐参考。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 18</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 角色 ===== */
+var CHARS=["wukong","tangseng","bajie","shaseng","bailong","guanyin","niumo","erlang"];
+var CHAR_INFO={
+ wukong:{name:"孙悟空",tag:"敢作敢当,你的人生不设限",color:"#C77B3A"},
+ tangseng:{name:"唐僧",tag:"认定方向,千山万水也拦不住你",color:"#A6532F"},
+ bajie:{name:"猪八戒",tag:"人间烟火气,最抚凡人心",color:"#D9967A"},
+ shaseng:{name:"沙僧",tag:"交给你的事,从来不用再问第二遍",color:"#5E7A6E"},
+ bailong:{name:"白龙马",tag:"安静承载,关键时刻绝不缺席",color:"#4A6D8C"},
+ guanyin:{name:"观音",tag:"看得清全局,也接得住所有人",color:"#7A6DA6"},
+ niumo:{name:"牛魔王",tag:"义字当头,认下的人护到底",color:"#8C5A4A"},
+ erlang:{name:"二郎神",tag:"对自己狠,做事有章法",color:"#6B7280"}
+};
+/* ===== 角色报告 ===== */
+var REPORTS={
+ wukong:{ps:[
+  ["你的样子","能力是你最硬的名片:敢想敢干,别人还在犹豫,你已经动手了。你不怕难,也不服管,但你的桀骜从来只对外——真正护起人来,你比谁都上心。"],
+  ["你的内核","你不是不服规则,是不服「没道理的规则」;你要的从来不是特权,是凭本事说话的自由。这份底气,让你在关键时刻特别靠得住。"],
+  ["可以留意","能力太强的人容易独自扛下一切,也容易忽略同伴的节奏。偶尔放慢半步,团队才追得上你。"]],
+  adv:["你的直接很珍贵,对亲近的人偶尔加一句解释","别让「我行我上」变成别人的依赖,给队友留出手的机会","真正束缚你的从来不是别人的紧箍咒,是自律——用好它"]},
+ tangseng:{ps:[
+  ["你的样子","目标感是你最强的武器:看清方向,就一步一步往前走,不因风景诱人改道,也不因妖怪拦路回头。看起来温和,骨子里比谁都倔。"],
+  ["你的内核","你信的东西不多,但每一样都信得很深:承诺、原则、善意。别人靠本事降妖,你靠的是让所有人相信——这条路是对的。"],
+  ["可以留意","高标准是好事,但要求和说教只有一线之隔。把念叨换成倾听,你的坚持会感染更多人。"]],
+  adv:["你的方向感是稀缺资源,别让它被日常琐碎磨钝","原则要守,表达可以更柔:换个说法,效果会翻倍","你负责走稳自己的路,不必负责所有人都跟上"]},
+ bajie:{ps:[
+  ["你的样子","你是人群里的烟火气:会吃会玩会偷懒,但真到了事上,该出的力一点不少。你不装,不端着,让身边的人放松——这本身就是很了不起的能力。"],
+  ["你的内核","你活得比很多人都通透:不追假大空,要实实在在的开心;不内耗,得快乐且快乐。别人拼命卷,你在认真生活。"],
+  ["可以留意","随和的好处是快乐,风险是容易被忽略真实需求。如果「都行」里藏着「其实我想」,不妨说出来。"]],
+  adv:["你的松弛感是很多紧绷的人羡慕的能力,不必自我怀疑","关键时刻的靠谱是你的人设底牌,保持这个平衡","偶尔认真起来一次,会惊掉所有人下巴,记得用"]},
+ shaseng:{ps:[
+  ["你的样子","你是那种「交给他就放心」的人:话不多,活不少;不抢功,不甩锅。团队里最不显眼,却往往是离开了才发现最缺的那个。"],
+  ["你的内核","「靠谱」不是你没有锋芒,而是你早已明白:把每件小事做扎实,比赢下所有嘴仗都有用。你的价值,时间会说话。"],
+  ["可以留意","你的付出和功劳,常常被你的低调一起藏了起来。适当的时候,让世界知道你做过的那些事。"]],
+  adv:["让成果被看见不是邀功,是基本的自我负责","你的稳定是稀缺品,但也留一点表达欲给自己","试着主动认领一件想做的事,而不只是承接安排"]},
+ bailong:{ps:[
+  ["你的样子","你很安静,安静到容易被忽略——但了解你的人都知道:关键时刻,你从不缺席。你习惯用行动到场,而不是用声音表态。"],
+  ["你的内核","你不争不抢,不是没脾气,而是明白「这件事里我做什么最重要」。这份清醒,让你在混乱中格外稳。"],
+  ["可以留意","沉默的付出容易变成别人眼里的「理所当然」。别等别人来发现你,偶尔也自己开口。"]],
+  adv:["你的付出值得被看见,主动展示不算炫耀","继续保有「关键时刻我来」的果断——那是你被低估的高光","在团队里多表达一次意见,你的视角其实很重要"]},
+ guanyin:{ps:[
+  ["你的样子","你是那种什么场面都能稳住的人:看得清,说得温和,帮得到点子上。朋友有难,第一个想到的往往就是你。"],
+  ["你的内核","你的强大不在于替所有人解决问题,而在于最合适的时机推出最合适的那只手。你深谙分寸:帮人帮到七分,留三分让人自己走。"],
+  ["可以留意","总是接住所有人的你,也需要有人接住。你习惯不开口求助,但求助不是麻烦别人,也是给别人靠近你的机会。"]],
+  adv:["你总出现在别人的危机现场,记得给自己安排充电期","保护别人的边界感是你的天赋,也请用在自己身上","偶尔示弱一次,你会发现大家很想帮你"]},
+ niumo:{ps:[
+  ["你的样子","你有实力,更有义气:认下的朋友护到底,答应的事一定办到。你的世界里,「信」比什么都重。"],
+  ["你的内核","你看重的是情与义的信条:信你的人,你倾力相护;负你的人,此生不再往来。这份浓烈,很多人想学都学不来。"],
+  ["可以留意","义气也会上头:护短护到是非不分,固执执到听不见劝。你的力量值得更聪明的方向。"]],
+  adv:["你的忠诚是稀缺品,再加一条「帮理不帮亲」会更立体","冲动之前留三秒:这一次,值不值?","硬汉也需要休息和台阶,别什么都硬扛"]},
+ erlang:{ps:[
+  ["你的样子","你对自己狠,对事情严,眼里揉不得沙子。你是那种不需要别人督促的人,标准永远比要求高半格。"],
+  ["你的内核","你要强,但强得有根有据:不攀比,不炫耀,只把事情做到自己认可的样子。外冷内热,说的就是你。"],
+  ["可以留意","高标准配上高冷脸,容易让人不敢亲近——别人看到的你,可能比真实的你冷得多。"]],
+  adv:["严于律己值得尊敬,对别人记得留出弹性","把「还不够好」偶尔换成「这样也行」,对内对外都适用","你的在意值得说出口,让别人有机会看到"]}
+};
+/* ===== 题目(原创情境) ===== */
+var ITEMS=[
+ {t:"团队陷入僵局,大家都不知怎么办时,你——",
+  o:["直接站出来:「我来打头阵,跟我走」","先安静看清全局,再给大家一个可行方向","安抚大家的情绪,先稳住阵脚","盘一盘手上的资源,想想还能找谁帮忙"],
+  w:[{wukong:2,erlang:1},{guanyin:2,tangseng:1},{tangseng:2,shaseng:1},{shaseng:2,bailong:1}]},
+ {t:"朋友聚会选餐厅,你的状态是——",
+  o:["心里早有答案,直接就定了","都行,大家开心,我吃啥都成","主动张罗,帮所有人安排明白","对吃最有研究,跟着我准没错"],
+  w:[{erlang:2,tangseng:1},{shaseng:2,bailong:1},{guanyin:2,tangseng:1},{bajie:2,niumo:1}]},
+ {t:"路上遇到有人欺负弱小——",
+  o:["冲上去拦住,先制止再说","先看清情况,再想办法化解","不掺和动手,找该管的人来处理","叫上朋友们一起去,人多力量大"],
+  w:[{wukong:2,erlang:1},{guanyin:2,tangseng:1},{bailong:2,shaseng:1},{niumo:2,bajie:1}]},
+ {t:"你的日常作息更接近——",
+  o:["跟着任务走,来了精神能通宵","早睡早起,规律得像口钟","困了就睡,饿了就吃,人生得意须尽欢","作息谈不上固定,但交给我的一定准时"],
+  w:[{wukong:2,erlang:1},{tangseng:2,shaseng:1},{bajie:2,wukong:1},{shaseng:2,bailong:1}]},
+ {t:"遇到不合理的规则,你会——",
+  o:["不合理就挑战它,或者绕开它","先照章来,再走流程提意见","规则再怪也有缘由,先研究清楚","不纠结规则,能达到目的就行"],
+  w:[{wukong:2,bajie:1},{erlang:2,tangseng:1},{tangseng:2,guanyin:1},{bajie:2,niumo:1}]},
+ {t:"解决问题时,你更习惯——",
+  o:["靠本事硬解,一力降十会","借力:找对人比埋头干更重要","稳扎稳打,一步步磨出来","能沟通解决,就绝不上火"],
+  w:[{wukong:2,erlang:1},{guanyin:2,niumo:1},{shaseng:2,bailong:1},{tangseng:2,guanyin:1}]},
+ {t:"被人夸的时候,你心里其实在想——",
+  o:["那是当然,我心里有数","谢谢,但我还差得远","表面淡定,心里已经开了花","夸的肯定不是我,我就是顺手做的"],
+  w:[{erlang:2,wukong:1},{tangseng:2,guanyin:1},{bajie:2,wukong:1},{bailong:2,shaseng:1}]},
+ {t:"团队里有人拖后腿,你会——",
+  o:["直接点出来,不惯着","先帮他补上,别耽误正事","私下聊聊,了解他的难处","重新分个工,把适合的换给他"],
+  w:[{wukong:2,erlang:1},{shaseng:2,bailong:1},{tangseng:2,guanyin:1},{guanyin:2,tangseng:1}]},
+ {t:"你收到过最多的评价是——",
+  o:["「你很厉害,就是太有主见」","「交给你,放心」","「和你在一起没压力」","「你这个人,够义气」"],
+  w:[{wukong:2,erlang:1},{shaseng:2,bailong:1},{bajie:2,tangseng:1},{niumo:2,wukong:1}]},
+ {t:"面对漫长的目标,你的心态是——",
+  o:["认准了,一步一个脚印走","赶路要紧,但沿途也得吃好玩好","走就完了,何必想那么多","默默走,该到的时候自然到"],
+  w:[{tangseng:2,erlang:1},{bajie:2,niumo:1},{wukong:2,niumo:1},{bailong:2,shaseng:1}]},
+ {t:"如果被人辜负了,你会——",
+  o:["不再信任,直接划清界限","难过,但也会想是不是有误会","气一阵,对方回头依然愿意接纳","不声张,但从此刻意保持距离"],
+  w:[{erlang:2,wukong:1},{tangseng:2,bajie:1},{bajie:2,guanyin:1},{bailong:2,shaseng:1}]},
+ {t:"你更喜欢的队友类型是——",
+  o:["能打硬仗的实力派","会照顾人的细心派","自带欢乐气氛的开心派","少说话多干活的踏实派"],
+  w:[{wukong:2,erlang:1},{guanyin:2,tangseng:1},{bajie:2,wukong:1},{shaseng:2,bailong:1}]},
+ {t:"压力特别大的时候,你的放松方式是——",
+  o:["找个没人的地方,痛快发泄一场","睡一觉,天大的事明天再说","好好吃一顿,没有什么是一顿解决不了的","找人聊聊,把心结说开"],
+  w:[{wukong:2,erlang:1},{bajie:2,shaseng:1},{niumo:2,bajie:1},{tangseng:2,guanyin:1}]},
+ {t:"面对权威或领导,你的态度是——",
+  o:["有本事说话,没本事别管我","尊重,但保持自己的判断","对的就听,不对的想想怎么说","不太多话,安排的事做好就行"],
+  w:[{wukong:2,niumo:1},{erlang:2,tangseng:1},{tangseng:2,guanyin:1},{shaseng:2,bailong:1}]},
+ {t:"你藏得最深的软肋是——",
+  o:["怕被说「不过是运气好」","怕在乎的人受委屈","怕认真投入之后还是失败","其实很需要被认可,但嘴硬"],
+  w:[{erlang:2,wukong:1},{guanyin:2,tangseng:1},{shaseng:2,erlang:1},{niumo:2,bajie:1}]},
+ {t:"朋友遇到困难,你一般会——",
+  o:["第一时间赶到,缺什么补什么","帮他分析清楚,让他自己拿主意","带他吃顿好的,先松快松快","不多说,默默把他没做完的事做了"],
+  w:[{wukong:2,niumo:1},{guanyin:2,tangseng:1},{bajie:2,niumo:1},{bailong:2,shaseng:1}]},
+ {t:"如果有个称号可以选,你想要——",
+  o:["天下无双","定海神针","人间烟火","润物无声"],
+  w:[{wukong:2,erlang:1},{shaseng:2,bailong:1},{bajie:2,niumo:1},{guanyin:2,tangseng:1}]},
+ {t:"对「取经」一样的长远目标,你的态度是——",
+  o:["路是自己选的,再难也要走完","尽力而为,结果交给天意","见招拆招,走一步算一步","方向对了,慢一点没关系"],
+  w:[{tangseng:2,erlang:1},{bajie:2,guanyin:1},{wukong:2,bajie:1},{bailong:2,tangseng:1}]}
+];
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<4;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span><span>'+q.o[i]+'</span></button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var sc={},mx={};
+ CHARS.forEach(function(c){sc[c]=0;mx[c]=0});
+ ITEMS.forEach(function(it){it.w.forEach(function(map){for(var k in map){mx[k]+=map[k]}})});
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v===undefined||v===null){return}var map=it.w[v];for(var k in map){sc[k]+=map[k]}});
+ var order=CHARS.slice().sort(function(a,b){return sc[b]/mx[b]-sc[a]/mx[a]});
+ renderResult(order,sc,mx);
+}
+/* ===== 结果 ===== */
+function renderResult(order,sc,mx){
+ var top=order[0],second=order[1];
+ var T=CHAR_INFO[top],R=REPORTS[top];
+ var h='<div class="rhead"><div class="k">西游记角色匹配 · 测试结果</div><h2>你最像的角色是「'+T.name+'」</h2><p>'+T.tag+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:12px">八位角色匹配度</div>';
+ order.forEach(function(c){var p=Math.round(sc[c]/mx[c]*100);
+  h+='<div class="dimrow'+(c===top?" top":"")+'"><span class="nm">'+CHAR_INFO[c].name+'</span><span class="track"><i data-w="'+p+'"></i></span><span class="vl">'+p+'%</span></div>';
+ });
+ h+='<div class="tcoach">匹配度按你的选择分布计算,最高的一般在 60% 以上——看看有没有你没想到的角色也排得很靠前。</div></div>';
+ h+='<div class="mirror"><span class="mname" style="color:'+CHAR_INFO[second].color+'">第二匹配 · '+CHAR_INFO[second].name+'</span><span class="mtag">'+CHAR_INFO[second].tag+'</span></div>';
+ h+='<div class="rcard">';
+ h+='<div class="typehead"><div class="tname" style="color:'+T.color+'">'+T.name+'</div><div class="ttag">'+T.tag+'</div></div>';
+ R.ps.forEach(function(sec){h+='<div class="sect"><h4>'+sec[0]+'</h4><p>'+sec[1]+'</p></div>'});
+ h+='<div class="sect"><h4>给这种性格的小建议</h4><ul class="tadv">';
+ R.adv.forEach(function(a){h+='<li>'+a+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="note">取经路上,师徒四人加一匹马,谁都不是多余的角色:有人打头阵,有人定方向,有人添欢乐,有人补遗漏。找到自己的位置,比成为谁更重要。</div>';
+ h+='</div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试基于《西游记》古典名著角色的趣味演绎,仅供娱乐参考。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

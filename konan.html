@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>名侦探柯南角色性格测试 · 20题</title>
+<meta name="description" content="20道情境题,匹配你和《名侦探柯南》角色的相似度:柯南、新一、小兰、灰原哀、毛利小五郎、服部平次、怪盗基德、安室透,输出复合匹配结果。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2335507A'/></svg>">
+<style>
+:root{
+  --ink:#23272F;--sub:#646B78;--faint:#959CA8;--line:#E2E7EE;--card:#FFFFFF;
+  --bg1:#F5F7FA;--bg2:#E9EDF4;--accent:#35507A;--accent2:#7C93B8;
+  --weak:#EAF0F8;--radius:20px;--shadow:0 10px 30px rgba(45,65,100,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.75}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(53,80,122,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#DFE6EF;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:19.5px;font-weight:600;line-height:1.6;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #CDD6E2;flex:none;margin-top:2px;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:96px;flex:none;font-size:14px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#EBF0F6;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:56px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.dimrow.top .nm{color:var(--accent)}
+.dimrow.top .track i{background:linear-gradient(90deg,#35507A,#5E7CA8)}
+.tcoach{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:24px;font-weight:700}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#3B4049;line-height:1.85}
+.tadv{margin:0;padding:0;list-style:none}
+.tadv li{position:relative;padding-left:24px;font-size:14px;color:#4D5360;margin-bottom:8px;line-height:1.8}
+.tadv li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:700}
+.note{font-size:13px;color:var(--sub);background:#F5F7FB;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.75}
+.mirror{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:14px 18px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7);flex-wrap:wrap}
+.mirror .mname{font-weight:700;font-size:15px;flex:none}
+.mirror .mtag{font-size:13px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">CONAN · 角色匹配</div>
+      <h1>名侦探柯南角色性格测试</h1>
+      <p class="lead">20 道情境题,每道题藏着 8 位角色不同的处事方式。做完之后,你会看到自己与每位角色的匹配度,以及最像的那一位的完整性格报告——也许你会发现,你身上住着不止一个角色。</p>
+      <div class="chips">
+        <span class="chip">20 道题</span>
+        <span class="chip">约 4 分钟</span>
+        <span class="chip">8 位角色匹配</span>
+        <span class="chip">复合结果</span>
+      </div>
+      <ul class="list">
+        <li>凭第一直觉作答,没有「正确答案」,越真实越准</li>
+        <li>结果会同时展示最高匹配与第二匹配,你可能兼具两种气质</li>
+        <li>本测试是粉丝向趣味内容,和官方没有关系,仅供娱乐</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">本测试为粉丝向趣味内容,《名侦探柯南》角色及相关内容版权归原著方所有,测试结果仅供娱乐参考。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 20</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 角色 ===== */
+var CHARS=["conan","shinichi","ran","haibara","kogoro","heiji","kid","amuro"];
+var CHAR_INFO={
+ conan:{name:"江户川柯南",tag:"冷静的观察者,正义感藏在镜片后面",color:"#35507A"},
+ shinichi:{name:"工藤新一",tag:"自信爆棚的推理狂,高光时刻属于你",color:"#3D6B8E"},
+ ran:{name:"毛利兰",tag:"温柔与勇敢,你两样都没落下",color:"#B06A7C"},
+ haibara:{name:"灰原哀",tag:"冷,是被世界磨出来的保护色",color:"#5E6E8C"},
+ kogoro:{name:"毛利小五郎",tag:"松弛感是顶级天赋,你是懂生活的",color:"#8C6B4A"},
+ heiji:{name:"服部平次",tag:"热血直率,认定了就往前冲",color:"#A6553F"},
+ kid:{name:"怪盗基德",tag:"出场自带聚光灯和玫瑰",color:"#7B5EA7"},
+ amuro:{name:"安室透",tag:"三份工都做到满分,克制得体",color:"#4A7A6A"}
+};
+/* ===== 题目(原创情境) ===== */
+var ITEMS=[
+ {t:"看侦探推理类的剧集时,让你最上头的是——",
+  o:["线索被一条条串起来,自己同步推理的快感","侦探揭晓真相那一刻的高光","案件背后人与人的羁绊和爱恨","一边看一边吐槽剧情与手法"],
+  w:[{conan:2,haibara:1},{shinichi:2,kid:1},{ran:2,heiji:1},{kogoro:2,amuro:1}]},
+ {t:"朋友深夜打来电话,声音明显不对劲——",
+  o:["先安静听完,再问「你现在需要什么」","「你在哪?把地址发我,我现在出门」","「别急,咱们把事一件件排出来,都有解」","「下楼,撸个串,我请,边吃边说」"],
+  w:[{haibara:2,conan:1},{ran:2,heiji:1},{amuro:2,conan:1},{heiji:2,kogoro:1}]},
+ {t:"在一场聚会或团建里,你通常是——",
+  o:["气氛组担当,段子密集,谁都聊得来","混在人群中,谁来搭话都接得住","话不多,但安静地观察每个人","人群中央讲故事的那个人"],
+  w:[{kid:2,kogoro:1},{amuro:2,ran:1},{conan:2,haibara:1},{shinichi:2,kid:1}]},
+ {t:"看到有人当众欺负弱小,你会——",
+  o:["当场站出来:「这不合适吧」","先不动声色,取证之后再按规则反击","先把人护到身后,再想怎么善后","用气场压过去:「有事冲我来」"],
+  w:[{ran:2,heiji:1},{conan:2,amuro:1},{amuro:2,ran:1},{shinichi:2,heiji:1}]},
+ {t:"表达在意和喜欢的方式,你更接近——",
+  o:["直接说出口:「我喜欢你,是认真的」","制造惊喜,像变出一朵玫瑰那样","嘴上从不提,细节全在行动里","记住对方说过的一切,悄悄照顾"],
+  w:[{heiji:2,ran:1},{kid:2,shinichi:1},{haibara:2,kogoro:1},{amuro:2,haibara:1}]},
+ {t:"压力大到快撑不住的时候,你会——",
+  o:["深呼吸,把情绪按住,先扛完再说","给自己放一天假,唱歌睡觉躺平","找信赖的人倾诉,说出来就好一半","把压力当燃料,通宵也要解决"],
+  w:[{haibara:2,amuro:1},{kogoro:2,kid:1},{ran:2,heiji:1},{conan:2,shinichi:1}]},
+ {t:"关于「真相」,你的态度是——",
+  o:["真相必须被揭开,哪怕过程很痛","真相重要,但更要紧的是它能帮到谁","真相是双刃剑,亮出来之前要掂量","大多数真相没那么重要,开心就好"],
+  w:[{conan:2,shinichi:1},{amuro:2,ran:1},{haibara:2,amuro:1},{kogoro:2,kid:1}]},
+ {t:"做重大决定(换工作、搬家、分手),你靠什么拍板——",
+  o:["列清单打分,数据和逻辑说话","想清楚了就行动,不拖泥带水","问一圈信任的人,综合感受再定","跟着直觉走,先冲了再说"],
+  w:[{conan:2,amuro:1},{shinichi:2,heiji:1},{ran:2,haibara:1},{heiji:2,kid:1}]},
+ {t:"被人误解了,你的第一反应是——",
+  o:["立刻解释清楚,不给误会留空间","不解释,用行动自证","心里难受,但先消化情绪再说","无所谓,信不信随你"],
+  w:[{shinichi:2,heiji:1},{haibara:2,conan:1},{ran:2,amuro:1},{kogoro:2,kid:1}]},
+ {t:"难得的独处周末,你最可能在做——",
+  o:["钻研一件一直想搞懂的事(技术/模型/推理)","睡到自然醒,美食综艺,治愈充电","出门走走拍照,顺便计划一次小冒险","约人打球或训练,出一身汗"],
+  w:[{conan:2,haibara:1},{kogoro:2,ran:1},{kid:2,shinichi:1},{heiji:2,amuro:1}]},
+ {t:"突然被推上台发言或负责一场活动,你会——",
+  o:["接住,很快进入负责人状态","先默默把方案想扎实,再出手","有点怵,但硬着头皮也能完成","能推就推,推不掉就随缘发挥"],
+  w:[{amuro:2,shinichi:1},{conan:2,haibara:1},{ran:2,heiji:1},{kogoro:2,kid:1}]},
+ {t:"你发现很信任的朋友对你撒了谎——",
+  o:["直接摊牌:「咱俩把话说开」","先弄清他这么做的原因,再决定","很难过,但先保护好自己的情绪","表面不动声色,之后慢慢疏远"],
+  w:[{heiji:2,ran:1},{amuro:2,conan:1},{ran:2,haibara:1},{haibara:2,conan:1}]},
+ {t:"面对明显比自己强的对手,你的心态是——",
+  o:["兴奋,正好试试自己的斤两","嘴上不认输,心里默默算胜率","承认差距,但绝不自乱阵脚","不硬碰,绕开找别的路"],
+  w:[{heiji:2,shinichi:1},{shinichi:2,kid:1},{amuro:2,haibara:1},{conan:2,kid:1}]},
+ {t:"你理想中的一天是——",
+  o:["解谜、思考、看穿一件事的来龙去脉","身边重要的人都在,热热闹闹","没有安排,阳光、咖啡和发呆","完成一个漂亮的作品或表演"],
+  w:[{conan:2,haibara:1},{ran:2,heiji:1},{kogoro:2,ran:1},{kid:2,shinichi:1}]},
+ {t:"对某件事不满,你更常用的方式是——",
+  o:["当面说清楚,哪怕语气直一点","不吵,用结果让你们闭嘴","先忍一忍,找合适的时机提","阴阳两句,然后自己消化"],
+  w:[{heiji:2,ran:1},{shinichi:2,conan:1},{amuro:2,ran:1},{haibara:2,kogoro:1}]},
+ {t:"排队时有人明目张胆插队,你会——",
+  o:["出声提醒,规矩就是规矩","看他一眼,心里记下,不做纠缠","替后面所有人说句话","大声阴阳怪气让他难堪"],
+  w:[{heiji:2,ran:1},{conan:2,haibara:1},{ran:2,amuro:1},{kid:2,kogoro:1}]},
+ {t:"经历一次明显的失败之后,你——",
+  o:["复盘每一个环节,找出问题根源","难过一阵,但很快给自己找新乐子","找人聊聊,哭一场或者骂一场","不服,立刻准备下一次"],
+  w:[{conan:2,amuro:1},{kogoro:2,kid:1},{ran:2,heiji:1},{heiji:2,shinichi:1}]},
+ {t:"你最受不了的人是——",
+  o:["逻辑混乱还自以为是的人","利用别人善意的人","践踏规则、伤害弱小的人","无趣的人,一点梗都没有"],
+  w:[{conan:2,shinichi:1},{amuro:2,haibara:1},{ran:2,heiji:1},{kid:2,kogoro:1}]},
+ {t:"朋友来找你出主意,你的风格是——",
+  o:["拆解问题,给出方案 A/B/C","先问「你自己想要什么」,再帮他想","先共情,再陪他把情绪放下来","讲个笑话,先让他笑出来"],
+  w:[{amuro:2,conan:1},{haibara:2,shinichi:1},{ran:2,heiji:1},{kid:2,kogoro:1}]},
+ {t:"你希望熟悉的人怎么形容你——",
+  o:["「靠得住,关键时刻从不掉链子」","「聪明、酷,而且有自己的坚持」","「温柔,但心里有自己的主见」","「有趣,和你在一起不会无聊」"],
+  w:[{amuro:2,conan:1},{haibara:2,shinichi:1},{ran:2,heiji:1},{kid:2,kogoro:1}]}
+];
+/* ===== 角色报告 ===== */
+var REPORTS={
+ conan:{ps:[
+   ["你在团队里的样子","你是那个「不动声色的靠谱」——人群里话不多,但每个人的状态、局势的走向都在你眼里。遇到问题,你习惯先观察、再推理、最后才出手,一击即中。"],
+   ["你的内核","镜片后面是一颗滚烫的心:你嘴上说着「只是顺便」,实际上是那个最见不得弱者受欺负的人。冷静是能力,正义感才是底色。"],
+   ["小提醒","你太习惯一个人扛了。请记得:侦探也有搭档,示弱一次不会让你失去什么,反而会让信任你的人松一口气。"]],
+  adv:["允许自己偶尔当个「普通小孩」:玩一局游戏、看一场球,不处理任何问题","把「我来」换成「能帮你一起看看吗」,让别人也有参与感","警惕用脑过度:睡眠是推理能力的电池"]},
+ shinichi:{ps:[
+   ["你在人群里的样子","你自带高光属性:反应快、表达强、关键时刻敢站出来说「交给我」。你不是在抢风头,只是你的能力放在那儿,光芒盖不住。"],
+   ["你的内核","「真相只有一个」——你对事情的认真近乎执拗。你对世界有强烈的好奇和信念感,这种笃定让你在迷雾里也走得稳。"],
+   ["小提醒","自信是你的武器,但偶尔的「嘴硬」会挡住真正重要的东西。学会示弱和等待,你的高光不会减少,只会更完整。"]],
+  adv:["下次先说「你怎么看」,把主场让给别人一次","把「我知道了」换成「你接着说」,你会听到更多","认真听比快速答更难,也更稀缺"]},
+ ran:{ps:[
+   ["你在关系里的样子","你是天生的守护者:朋友有事你第一个到,家人难过你第一个察觉。你直率、热烈,爱和在意从不藏着掖着。"],
+   ["你的内核","温柔之外,你其实非常勇敢:危险来临时,你从不当旁观者。你的勇敢不是不怕,而是怕着也要站出来。"],
+   ["小提醒","你常把所有人放在自己前面,别忘了留一份温柔给自己。被照顾、被担心,都不是失去独立。"]],
+  adv:["练习说「我需要帮忙」:这不是脆弱,是信任","每天留 15 分钟只属于自己的时间","别人的情绪不是你的考卷,别把责任全揽走"]},
+ haibara:{ps:[
+   ["你在人群里的样子","你身上有一种安静的存在感:不主动融入,也不刻意疏远;别人热闹时你在旁边看着,必要时一句冷幽默精准落地。"],
+   ["你的内核","你的冷,是清醒不是冷漠——你早就看透了很多事,也正因为看得透,你的温柔才稀有:你只对极少数人露出柔软的一面。"],
+   ["小提醒","独立久了容易忘了:你也有资格被照顾。把「没事」说成「其实有点难过」,不会让你变弱,会让爱你的人靠近。"]],
+  adv:["试着让信任的人帮你一个小忙,观察一下并没有那么可怕","半夜的情绪不必一个人消化,发条消息给对的人","你的毒舌可以留着,但把真心也偶尔说出口"]},
+ kogoro:{ps:[
+   ["你给人的印象","松弛、随性、会享受——喝酒、追星、躺平,人生苦短你在认真贯彻。但熟悉你的人知道:大事上,你从没真的糊弄过。"],
+   ["你的内核","你的直觉和阅历远超你表现出来的样子。平时藏锋,关键时刻的爆发力让所有人愣住——你只是不爱一直端着。"],
+   ["小提醒","你的「差不多得了」是种天赋,但有些关系需要你稳定在线。把重要的人记在待办的最上面。"]],
+  adv:["定期清理一次待办,拖延的小事会悄悄消耗好感","你的直觉很准,做决定前先听听它","认真起来的你魅力极高,别总藏着"]},
+ heiji:{ps:[
+   ["你在人群里的样子","你是那种把热情写在脸上的人:声音大、笑声亮、讲义气,朋友有难二话不说往前站。你和人之间没有弯弯绕绕。"],
+   ["你的内核","热血之下你其实想得很清楚:认定了的事,谁劝都没用,这种行动力和笃定是很多人羡慕的。你输过,但从不服。"],
+   ["小提醒","冲之前多等三秒,你的判断会更好;说之前多想一遍,你在乎的人会更安心。"]],
+  adv:["下次火气上来,先喝口水再开口","把「没事」换成「其实我在意」,心事先给最亲的人","输了就认,复盘完再来,你本来就擅长重战"]},
+ kid:{ps:[
+   ["你在人群里的样子","你出场自带背景音乐:会玩、会演、有分寸地张扬。你是那种让场子「活起来」的人,也是那种懂得什么时候谢幕的人。"],
+   ["你的内核","张扬是外壳,底下是极其精准的掌控力:什么场合说什么话、给谁留台阶,你心里门儿清。你的浪漫是计算过的。"],
+   ["小提醒","总当气氛担当会累。你也有安静的需求,别让「人设」绑架真实的你。"]],
+  adv:["偶尔摘下面具,让亲密的人看到素颜的你","认真也是一件很酷的事,不必都做成玩笑","把出场的才华,留几个只给最重要的人"]},
+ amuro:{ps:[
+   ["你给人的印象","你像是开了很多个窗口同时运转:工作、生活、人际关系都打理得滴水不漏,「靠谱」几乎是你的名字。"],
+   ["你的内核","你习惯把情绪收在里面,把体面留给外面。多面身份的切换背后,是你对自己的高要求——你想把每一种角色都做到满分。"],
+   ["小提醒","所有身份都做到满分,唯独容易忘了「自己的感受」。不是所有责任都该你背,先给自己排一个休息的班次。"]],
+  adv:["本周给自己安排一次「不产出」的休息","把一部分任务正式交出去,信任也是能力","允许有「今天状态一般」的日子,天不会塌"]}
+};
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<4;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span><span>'+q.o[i]+'</span></button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var sc={},mx={};
+ CHARS.forEach(function(c){sc[c]=0;mx[c]=0});
+ ITEMS.forEach(function(it){it.w.forEach(function(map){for(var k in map){mx[k]+=map[k]}})});
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v===undefined||v===null){return}var map=it.w[v];for(var k in map){sc[k]+=map[k]}});
+ var order=CHARS.slice().sort(function(a,b){return sc[b]/mx[b]-sc[a]/mx[a]});
+ renderResult(order,sc,mx);
+}
+/* ===== 结果 ===== */
+function renderResult(order,sc,mx){
+ var top=order[0],second=order[1];
+ var T=CHAR_INFO[top],TT=REPORTS[top];
+ var h='<div class="rhead"><div class="k">CONAN · 匹配结果</div><h2>你最像的角色是「'+T.name+'」</h2><p>'+T.tag+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:12px">八位角色匹配度</div>';
+ CHARS.forEach(function(c){var p=Math.round(sc[c]/mx[c]*100);
+  h+='<div class="dimrow'+(c===top?" top":"")+'"><span class="nm">'+CHAR_INFO[c].name+'</span><span class="track"><i data-w="'+p+'"></i></span><span class="vl">'+p+'%</span></div>';
+ });
+ h+='<div class="tcoach">匹配度反映的是你的选择与每位角色处事方式的吻合程度。每个人都有复合气质,下面的完整报告属于你的「第一匹配」。</div></div>';
+ h+='<div class="mirror"><span class="mname" style="color:'+CHAR_INFO[second].color+'">第二匹配 · '+CHAR_INFO[second].name+'</span><span class="mtag">'+CHAR_INFO[second].tag+'</span></div>';
+ h+='<div class="rcard"><div class="typehead"><div class="tname" style="color:'+T.color+'">'+T.name+'</div><div class="ttag">'+T.tag+'</div></div>';
+ TT.ps.forEach(function(sec){h+='<div class="sect"><h4>'+sec[0]+'</h4><p>'+sec[1]+'</p></div>'});
+ h+='<div class="sect"><h4>给你的小贴士</h4><ul class="tadv">';
+ TT.adv.forEach(function(a){h+='<li>'+a+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="note">角色是镜子,不是印章。你的行为里会有不同角色的影子,这很正常——人的丰富,恰恰在于不止一种可能。</div></div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试为粉丝向趣味内容,与官方无关;《名侦探柯南》角色及相关内容版权归原著方所有。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>

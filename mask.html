@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>社会面具测试 · 20题</title>
+<meta name="description" content="20道情境题,测出你最习惯戴的那副社会面具:微笑营业者、无事发生型、快乐担当还是低功耗模式,并为你量一量面具的厚度。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%236F6A9C'/></svg>">
+<style>
+:root{
+  --ink:#272430;--sub:#6B6678;--faint:#9C97A8;--line:#E7E2EF;--card:#FFFFFF;
+  --bg1:#F7F5FA;--bg2:#EDE9F4;--accent:#6F6A9C;--accent2:#A49BC9;
+  --weak:#F1EEF8;--radius:20px;--shadow:0 10px 30px rgba(90,80,140,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background:linear-gradient(165deg,var(--bg1) 0%,var(--bg2) 100%);
+  min-height:100vh;color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto;padding:26px 18px calc(48px + env(safe-area-inset-bottom))}
+.view{display:none}
+.view.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;border:1px solid rgba(255,255,255,.7)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:600;margin-bottom:10px}
+h1{font-size:27px;line-height:1.35;margin-bottom:12px}
+.lead{color:var(--sub);font-size:15px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12.5px;color:var(--accent);background:var(--weak);border-radius:999px;padding:5px 12px;font-weight:500}
+.list{margin:0 0 22px;padding:0;list-style:none}
+.list li{position:relative;padding-left:20px;color:var(--sub);font-size:14.5px;margin-bottom:8px}
+.list li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent2);opacity:.75}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16.5px;
+  color:#fff;background:linear-gradient(140deg,var(--accent),var(--accent2));border-radius:16px;padding:15px 20px;
+  box-shadow:0 8px 20px rgba(111,106,156,.28);transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.foot{color:var(--faint);font-size:12px;margin-top:16px;line-height:1.7}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  font-size:19px;line-height:1;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.back:disabled{opacity:.35;cursor:default}
+.progress{flex:1;height:8px;border-radius:999px;background:#E4DFEF;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+.qidx{font-size:13px;color:var(--faint);flex:none;min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.qbox.slide{animation:slide .3s ease}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.qnum{font-size:12.5px;color:var(--faint);letter-spacing:.12em;margin-bottom:8px}
+.qtext{font-size:19.5px;font-weight:600;line-height:1.6;margin-bottom:22px;min-height:62px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 16px;font:inherit;font-size:15px;
+  color:var(--ink);text-align:left;cursor:pointer;transition:all .16s ease;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #D6D0E4;flex:none;margin-top:2px;transition:all .16s ease}
+.opt:hover{border-color:var(--accent2)}
+.opt.on{border-color:var(--accent);background:var(--weak)}
+.opt.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 3.5px #fff}
+.rhead{text-align:center;margin-bottom:18px}
+.rhead .k{font-size:12px;letter-spacing:.24em;color:var(--accent);font-weight:600}
+.rhead h2{font-size:25px;margin:8px 0 6px}
+.rhead p{color:var(--sub);font-size:14px}
+.rcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7)}
+.dimrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dimrow:last-child{margin-bottom:0}
+.dimrow .nm{width:118px;flex:none;font-size:13.5px;font-weight:600}
+.dimrow .track{flex:1;height:10px;border-radius:999px;background:#EFEBF7;overflow:hidden}
+.dimrow .track i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:52px;flex:none;text-align:right;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.dimrow.top .nm{color:var(--accent)}
+.thickbar{height:12px;border-radius:999px;background:#EFEBF7;overflow:hidden;margin:6px 0 12px}
+.thickbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.thickdesc{font-size:13.5px;color:var(--sub);line-height:1.85}
+.tcoach{font-size:13px;color:var(--accent);background:var(--weak);border-radius:12px;padding:9px 14px;margin-top:14px;line-height:1.7}
+.typehead{text-align:center;padding:6px 0 2px}
+.typehead .tname{font-size:24px;font-weight:700}
+.typehead .ttag{font-size:13.5px;color:var(--sub);margin-top:6px}
+.sect{margin-top:16px}
+.sect h4{font-size:15px;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.sect p{font-size:14.5px;color:#3C3949;line-height:1.85}
+.tadv{margin:0;padding:0;list-style:none}
+.tadv li{position:relative;padding-left:24px;font-size:14px;color:#4E4A5C;margin-bottom:8px;line-height:1.8}
+.tadv li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:700}
+.note{font-size:13px;color:var(--sub);background:#F6F4FA;border-radius:12px;padding:12px 14px;margin-top:14px;line-height:1.8}
+.mirror{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:14px 18px;margin-bottom:14px;border:1px solid rgba(255,255,255,.7);flex-wrap:wrap}
+.mirror .mname{font-weight:700;font-size:15px;flex:none}
+.mirror .mtag{font-size:13px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="v-intro" class="view active">
+    <div class="card">
+      <div class="kicker">PERSONA · 社会面具</div>
+      <h1>社会面具测试</h1>
+      <p class="lead">你在同事面前、在家人面前、在深夜独处时,是同一个你吗?20 道情境题,找到你最习惯戴的那副面具,也为你量一量它的厚度——看见它,往往是摘下来一点的第一步。</p>
+      <div class="chips">
+        <span class="chip">20 道题</span>
+        <span class="chip">约 4 分钟</span>
+        <span class="chip">4 种面具鉴定</span>
+        <span class="chip">面具厚度分析</span>
+      </div>
+      <ul class="list">
+        <li>凭第一反应作答,选「你实际会做的」,不是「你觉得应该做的」</li>
+        <li>面具不是缺点,它是我们适应社会的方式,关键是你是否察觉自己在戴</li>
+        <li>结果包含面具厚度与类型报告,仅供自我探索参考</li>
+      </ul>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <p class="foot">本测试为基于荣格「人格面具」概念的科普性原创自评,仅供自我认识参考,不构成心理诊断或专业建议。</p>
+    </div>
+  </section>
+
+  <section id="v-quiz" class="view">
+    <div class="qtop">
+      <button class="back" id="btnBack" onclick="goBack()">‹</button>
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="qidx" id="qidx">1 / 20</div>
+    </div>
+    <div class="qbox" id="qbox"></div>
+  </section>
+
+  <section id="v-result" class="view">
+    <div id="resultBody"></div>
+  </section>
+
+</div>
+<script>
+/* ===== 面具类型 ===== */
+var TYPES=["tao","qiang","kai","tou"];
+var TYPE_INFO={
+ tao:{name:"微笑营业者",tag:"「都行、可以、没问题」是你最熟练的台词",color:"#C97B84",
+  report:[
+   ["面具下的你","先看别人的脸色,再看自己的心情。你习惯把「没关系」挂在嘴边,说到自己都快信了:点菜说随便,加班说没事,被插队说算了。你不是没有想法,只是每次想开口,都会先替对方想一遍。"],
+   ["面具从哪来","很可能来自「懂事才会被喜欢」的旧经验:只有照顾好所有人的情绪,自己才是安全的。于是你学会了优先响应别人的需要,把自己的需要排在最后,排着排着就忘了。"],
+   ["面具的另一面","你的体贴和温柔都是真的,被大家喜欢也是真的。但别忘了,你被看见、被在乎的需要同样真实。真正的关系,经得起你偶尔的「不配合」。"]
+  ],
+  adv:["练习一句小拒绝:「这次不太方便」,不用加五百字解释","把「你还好吗」也分一句给自己","拒绝一次,你会发现天没有塌,对方也未必受伤"]
+ },
+ qiang:{name:"无事发生型",tag:"情绪调成静音,永远展示「我可以」",color:"#5B6B8C",
+  report:[
+   ["面具下的你","扛事的时候你最稳:方案被毙了就改一版更狠的,快崩溃了先把表情调成没事。白天是大家的主心骨,深夜才是自己消化情绪的时间,你很少让任何人看到你不好的一面。"],
+   ["面具从哪来","可能来自「示弱没有用」的过往:哭过没用,求过没用,后来索性什么都自己扛。你证明了「我可以」,但也慢慢忘了,「我需要」也是可以说出口的。"],
+   ["面具的另一面","这份铠甲帮你走过很多难路,值得尊重。但穿久了,别人会以为你刀枪不入,于是所有想靠近的人都被挡在了外面——包括你其实想要的那些。"]
+  ],
+  adv:["在小范围里试着示弱,一句「今天有点累」就够了","生病时接受别人的照顾,那不叫欠人情","「我需要帮忙」是陈述句,不是认输"]
+ },
+ kai:{name:"快乐担当",tag:"负责活跃气氛,难过塞在段子后面",color:"#D99A5B",
+  report:[
+   ["面具下的你","聚会的笑点靠你,冷场时救场的也是你。你擅长把心酸讲成段子,把尴尬圆成笑话,让所有人开开心心。只是散场之后,车里那段安静的路,才真正属于你自己。"],
+   ["面具从哪来","可能来自「开心果不会被抛弃」的经验:会逗人笑的孩子,总能多得一点喜欢。于是你把自己训练成了气氛开关,连难过的时候,第一反应也是「说点好笑的」。"],
+   ["面具的另一面","逗别人笑,是你爱人的方式,很珍贵。但笑是你的礼物,不是你的义务。你也值得有人费心逗你笑,值得在朋友面前安静一会儿,而不被追问「你怎么了」。"]
+  ],
+  adv:["试着说一次「我今天不太想搞笑」,看看会发生什么","允许自己在聚会里发呆,不说话也不会有人离开","找一个能接住你眼泪、而不是只欣赏你段子的人"]
+ },
+ tou:{name:"低功耗模式",tag:"不惹眼、不表态、不麻烦别人",color:"#7B8C8C",
+  report:[
+   ["面具下的你","电梯里认真看楼层数,群里从不第一个发言,能私聊绝不公开表态。你把自己调成低功耗模式:存在感降到最低,就不容易被挑错。别人说你高冷,其实你只是习惯先观察,再决定要不要现身。"],
+   ["面具从哪来","可能来自「出头会被针对」的旧经验:说错话被嘲笑过,表达被否定过,于是你学会了不出手、不亮牌、不给人机会评判你。安全,永远是第一优先。"],
+   ["面具的另一面","低功耗帮你躲开了很多麻烦,但也躲开了很多喜欢。人群里其实有人很想认识你,只是你把自己收得太好,他们找不到接口。偶尔亮一下,世界没那么危险。"]
+  ],
+  adv:["每周主动在一个群里说一句话,先练习「被看见」","把「随便」换成具体答案:我想吃火锅","允许自己发出一点声音,哪怕不完美,也没人会扣你分"]
+ }
+};
+/* ===== 厚度等级 ===== */
+var LVS=[
+ ["面具偏薄","你更像素颜出门:需要场合时会戴一会儿,但大部分时间,你选择用真实的样子见人。这是很珍贵的状态——请继续保持,也记得对还在戴面具的人多一点理解。"],
+ ["面具适中","你懂得看场合切换模式:该营业时营业,该做自己时做自己,切换基本自如。偶尔会分不清哪个是面具哪个是你,但整体上,你还握着遥控器。"],
+ ["面具偏厚","面具已经常常长在脸上,连独处时都忘了摘。你适应了所有人,除了你自己。建议从最小的事开始练习:先说一次真实想吃的菜,再拒绝一件不想做的事。"]
+];
+/* ===== 题目(原创情境) ===== */
+var ITEMS=[
+ {t:"同事在群里问:这个活能帮忙接一下吗?",
+  o:["「好呀没问题」,然后自己加班做完","「哈哈哈哈得加钱」,用玩笑挡回去","假装没看见,等别人先回","「我先看下手头的事」,然后没有然后"],
+  w:[{tao:2},{kai:2},{tou:2},{qiang:2}],mi:[2,1,2,1]},
+ {t:"朋友聚会聊到你最近的低谷期——",
+  o:["轻描淡写:「小事,都过去了」","编成一个段子,全场笑完就算翻篇","笑着说「都挺好」,再关心一圈别人的近况","笑笑不说话,低头继续剥虾"],
+  w:[{qiang:2},{kai:2},{tao:2},{tou:2}],mi:[2,2,2,1]},
+ {t:"你被误会了,对方语气还有点冲——",
+  o:["先道歉稳住局面,解释放在后面","「哎呀都是我的锅」,打个哈哈糊过去","平静地把事实摆出来","算了,不解释了,反正他也不听"],
+  w:[{tao:2},{kai:2},{qiang:2},{tou:2}],mi:[2,2,1,1]},
+ {t:"组里要选一个人上台汇报,进度没人认领——",
+  o:["上去可以,但我得先说个笑话热热场","低头看手机,希望没人点我的名字","直接接下,这是我该拿的分","大家都不接,那我就上吧"],
+  w:[{kai:2},{tou:2},{qiang:2},{tao:2}],mi:[1,2,0,2]},
+ {t:"很久不联系的朋友突然开口找你借钱——",
+  o:["借,虽然自己也不宽裕,但实在开不了口拒绝","先热情寒暄,再慢慢「失联」","「最近手头也紧」,一句话终结","消息已读,拖到对方自己放弃"],
+  w:[{tao:2},{kai:2},{qiang:2},{tou:2}],mi:[2,1,1,2]},
+ {t:"领导当着全组的面批评了你的方案——",
+  o:["用自嘲化解:「是我浅薄了哈哈哈」","面不改色听完,内心已经下班","当场认下,会后一个人消化","记下问题,回去改一版更狠的"],
+  w:[{kai:2},{tou:2},{tao:2},{qiang:2}],mi:[2,1,2,0]},
+ {t:"你正难过,有人关切地问「你怎么了」——",
+  o:["「需要一顿火锅才听得完的故事」","「没事没事,你忙你的」","「没有啊,我挺好的」","「小事,已经过去了」"],
+  w:[{kai:2},{tao:2},{tou:2},{qiang:2}],mi:[2,2,1,2]},
+ {t:"家族群里,长辈开始问工资、催婚——",
+  o:["直接回:「我的事我心里有数」","好脾气地「嗯嗯,在努力了」","发表情包,把话题轻轻带偏","开启消息免打扰,婚礼当天再出现"],
+  w:[{qiang:2},{tao:2},{kai:2},{tou:2}],mi:[1,2,1,2]},
+ {t:"到了新环境(新公司或新班级),前两周的你——",
+  o:["先抖两个包袱,快速混成熟人","安静观察,先摸清地形再说","热情主动,先跟所有人打招呼","专业高效,用实力说话"],
+  w:[{kai:2},{tou:2},{tao:2},{qiang:2}],mi:[2,1,2,1]},
+ {t:"聊天时对方讲了个你没听懂的笑话——",
+  o:["「没懂,展开讲讲」","跟着笑,还附和「太真实了」","直接承认:「我假装懂一下,配合你」","微笑点头,顺势换个话题"],
+  w:[{qiang:2},{tao:2},{kai:2},{tou:2}],mi:[0,2,1,2]},
+ {t:"你精心准备的提议被否了——",
+  o:["行吧,那庆祝一下我方案阵亡,顺手把气氛圆回来","第一反应:是不是我哪里没做好","无所谓,反正本来也没抱多大希望","复盘逻辑,下次带着更硬的证据再来"],
+  w:[{kai:2},{tao:2},{tou:2},{qiang:2}],mi:[1,2,1,0]},
+ {t:"电梯里遇到不太熟的同事,你——",
+  o:["点头致意,各自安好","主动搭话:「吃了吗」","盯着楼层数字,看得格外认真","「今天电梯挺配合,没卡」,随口开个场"],
+  w:[{qiang:2},{tao:2},{tou:2},{kai:2}],mi:[0,1,2,1]},
+ {t:"排队时有人插队,插到了你前面——",
+  o:["内心翻了个白眼,身体一动不动","「哎我们都在排队呢」,语气轻松但明确","算了,就当没看见","「不好意思,队尾在后面」"],
+  w:[{tou:2},{kai:2},{tao:2},{qiang:2}],mi:[2,1,2,0]},
+ {t:"被人当面夸了,你的第一反应——",
+  o:["「没有没有,我还差得远」","「还行吧」,然后赶紧换话题","「谢谢,我也觉得」","「你眼光真好」,顺便也夸回去"],
+  w:[{tao:2},{tou:2},{qiang:2},{kai:2}],mi:[2,1,0,1]},
+ {t:"一个你其实不想去的邀约,最后你——",
+  o:["「我下次一定」,这次先婉拒了","去了,全程配合,回家累瘫","「我看看时间哈」,然后没有然后","「这次不去啦,改天约」"],
+  w:[{kai:2},{tao:2},{tou:2},{qiang:2}],mi:[1,2,2,0]},
+ {t:"朋友圈里,你对外呈现的形象是——",
+  o:["三天可见,发得极少","偶尔冒泡,只发值得一提的事","段子和美食,快乐代言人","温暖治愈,岁月静好"],
+  w:[{tou:2},{qiang:2},{kai:2},{tao:2}],mi:[1,1,2,2]},
+ {t:"和亲近的人吵架后,先低头破冰的是——",
+  o:["我先发个沙雕表情包试探","谁错谁低头,不惯着","不管谁的错,先低头的是我","冷战到底,让时间解决"],
+  w:[{kai:2},{qiang:2},{tao:2},{tou:2}],mi:[1,0,2,2]},
+ {t:"一个人在家,情绪突然低落的深夜,你——",
+  o:["翻聊天记录,复盘是不是自己哪句话说错了","刷搞笑视频,笑着笑着更空了","安静追剧打游戏,早就习惯了","把目标清单写一遍,明天继续战斗"],
+  w:[{tao:2},{kai:2},{tou:2},{qiang:2}],mi:[2,1,0,1]},
+ {t:"有人向你倾诉痛苦,但你自己也很累——",
+  o:["打起精神,先稳稳接住对方","默默陪着,不太会说什么","「需要我做什么,直接说」","分享一个自己更惨的故事,用幽默安慰对方"],
+  w:[{tao:2},{tou:2},{qiang:2},{kai:2}],mi:[2,1,0,1]},
+ {t:"如果有一天,可以彻底不用「营业」——",
+  o:["把「都行」改成所有真正的答案","安静待着,不用负责逗任何人笑","坦然承认「我也想被人接住一次」","大声说出一次自己的立场"],
+  w:[{tao:2},{kai:2},{qiang:2},{tou:2}],mi:[0,0,0,0]}
+];
+/* ===== 状态 ===== */
+var idx=0,ans=[];
+var vIntro=document.getElementById("v-intro"),vQuiz=document.getElementById("v-quiz"),vRes=document.getElementById("v-result");
+function show(v){[vIntro,vQuiz,vRes].forEach(function(x){x.classList.remove("active")});v.classList.add("active");window.scrollTo(0,0)}
+function startQuiz(){idx=0;ans=[];show(vQuiz);renderQ()}
+function renderQ(){
+ var q=ITEMS[idx],box=document.getElementById("qbox");
+ box.classList.remove("slide");void box.offsetWidth;box.classList.add("slide");
+ var h='<div class="qnum">第 '+String(idx+1).padStart(2,"0")+' 题</div><div class="qtext">'+q.t+'</div><div class="opts">';
+ for(var i=0;i<4;i++){h+='<button class="opt'+(ans[idx]===i?" on":"")+'" data-v="'+i+'"><span class="dot"></span><span>'+q.o[i]+'</span></button>'}
+ h+='</div>';box.innerHTML=h;
+ box.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){choose(this)}});
+ document.getElementById("qidx").textContent=(idx+1)+" / "+ITEMS.length;
+ document.getElementById("pbar").style.width=(idx/ITEMS.length*100)+"%";
+ document.getElementById("btnBack").disabled=idx===0;
+}
+function choose(el){
+ var v=parseInt(el.dataset.v,10);ans[idx]=v;
+ el.parentNode.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+ el.classList.add("on");
+ setTimeout(function(){
+  if(idx<ITEMS.length-1){idx++;renderQ()}else{document.getElementById("pbar").style.width="100%";compute()}
+ },190);
+}
+function goBack(){if(idx>0){idx--;renderQ()}}
+/* ===== 计分 ===== */
+function compute(){
+ var sc={},mx={};
+ TYPES.forEach(function(c){sc[c]=0;mx[c]=0});
+ ITEMS.forEach(function(it){it.w.forEach(function(map){for(var k in map){mx[k]+=map[k]}})});
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v===undefined||v===null){return}var map=it.w[v];for(var k in map){sc[k]+=map[k]}});
+ var msum=0;
+ ITEMS.forEach(function(it,i){var v=ans[i];if(v!==undefined&&v!==null){msum+=it.mi[v]}});
+ var order=TYPES.slice().sort(function(a,b){return sc[b]/mx[b]-sc[a]/mx[a]});
+ renderResult(order,sc,mx,msum);
+}
+/* ===== 结果 ===== */
+function renderResult(order,sc,mx,msum){
+ var top=order[0],second=order[1];
+ var T=TYPE_INFO[top];
+ var pct=Math.round(msum/(ITEMS.length*2)*100);
+ var lv=LVS[pct<33?0:(pct<66?1:2)];
+ var h='<div class="rhead"><div class="k">社会面具测试 · 鉴定结果</div><h2>你是「'+T.name+'」</h2><p>'+T.tag+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:4px">面具厚度 · '+lv[0]+'</div>';
+ h+='<div class="thickbar"><i data-w="'+pct+'"></i></div>';
+ h+='<div class="dimrow"><span class="nm" style="width:74px">厚度值</span><span class="vl" style="width:52px;text-align:left;font-weight:700;color:var(--accent)">'+pct+'%</span></div>';
+ h+='<p class="thickdesc">'+lv[1]+'</p></div>';
+ h+='<div class="rcard"><div style="font-size:14px;font-weight:600;margin-bottom:12px">四种面具匹配度</div>';
+ order.forEach(function(c){var p=Math.round(sc[c]/mx[c]*100);
+  h+='<div class="dimrow'+(c===top?" top":"")+'"><span class="nm">'+TYPE_INFO[c].name+'</span><span class="track"><i data-w="'+p+'"></i></span><span class="vl">'+p+'%</span></div>';
+ });
+ h+='<div class="tcoach">占比越高,说明这副面具你戴得越熟练。它现在的样子,恰好是你保护过自己的方式。</div></div>';
+ h+='<div class="mirror"><span class="mname" style="color:'+TYPE_INFO[second].color+'">第二面具 · '+TYPE_INFO[second].name+'</span><span class="mtag">'+TYPE_INFO[second].tag+'</span></div>';
+ h+='<div class="rcard">';
+ h+='<div class="typehead"><div class="tname" style="color:'+T.color+'">'+T.name+'</div><div class="ttag">'+T.tag+'</div></div>';
+ T.report.forEach(function(sec){h+='<div class="sect"><h4>'+sec[0]+'</h4><p>'+sec[1]+'</p></div>'});
+ h+='<div class="sect"><h4>什么时候可以摘下来一点</h4><ul class="tadv">';
+ T.adv.forEach(function(a){h+='<li>'+a+'</li>'});
+ h+='</ul></div>';
+ h+='<div class="note">荣格把人在社会中呈现的样子称为「人格面具」(Persona):它不是虚伪,而是适应环境的正常功能。面具让你被接纳、被喜欢,但戴久了容易与自己失联——健康的做法不是扔掉面具,而是清楚地知道:自己什么时候在戴,什么时候可以摘。</div>';
+ h+='</div>';
+ h+='<div class="rhead" style="margin-top:22px"><button class="btn" onclick="location.reload()">重新测试</button></div>';
+ h+='<p class="foot" style="text-align:center">本测试为科普性原创自评,仅供参考,不构成心理诊断或专业建议。</p>';
+ document.getElementById("resultBody").innerHTML=h;
+ show(vRes);
+ setTimeout(function(){document.querySelectorAll(".track i,.thickbar i").forEach(function(el){el.style.width=el.dataset.w+"%"})},60);
+}
+</script>
+</body>
+</html>
